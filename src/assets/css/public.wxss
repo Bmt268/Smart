@@ -1,0 +1,1402 @@
+body {
+  font-family: PingFangSC-Regular, "微软雅黑";
+  text-align: left;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body pre {
+  font-family: PingFangSC-Regular, "微软雅黑";
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+:focus {
+  outline: 0;
+}
+.el-table .cell {
+  line-height: 0.4rem !important;
+}
+img {
+  font-size: 0.16rem;
+}
+body,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+pre,
+form,
+fieldset,
+input,
+p,
+blockquote,
+th,
+td,
+h1,
+h2,
+h3,
+h4,
+h4,
+h5,
+a {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+div,
+span,
+label,
+p,
+section,
+h1,
+h2,
+h3,
+h4,
+h4,
+h5 {
+  box-sizing: border-box;
+}
+table {
+  border-collapse: collapse;
+}
+ol,
+ul {
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+}
+caption,
+th {
+  text-align: left;
+}
+q:before,
+q:after,
+blockquote:before,
+blockquote:after {
+  content: ””;
+}
+img {
+  border: 0;
+  outline: none;
+}
+img[src=""] {
+  opacity: 0;
+}
+input {
+  border: 0;
+  outline: 0;
+}
+input::-webkit-input-placeholder {
+  color: #a7acc7;
+  font-size: 0.22rem;
+}
+[v-cloak] {
+  display: none;
+}
+.app {
+  /*
+    * 环节编辑模块 自定义下拉选择
+    */
+  /*
+    * 环节编辑模块结束
+    */
+}
+.app .fr {
+  float: right;
+}
+.app .fl {
+  float: left;
+}
+.app .mt8 {
+  margin-top: 8px;
+}
+.app .head .class_select .el-select .el-input__inner {
+  width: 1.75rem;
+}
+.app .el-collapse-item[id="planDetail"] .el-collapse-item__header {
+  height: 0.86rem;
+}
+.app .el-collapse-item__content {
+  top: -0.07rem;
+}
+.app .el-collapse-item__arrow {
+  font-weight: bold;
+}
+.app .el-input__inner[id="course-class"] {
+  width: 4.31rem;
+  height: 0.44rem;
+  cursor: pointer;
+}
+.app .el-input__inner[id="course-class"]::placeholder {
+  font-size: 0.18rem;
+  color: #6e6d7a;
+}
+.app .el-input__inner[id="course-class"]:focus {
+  border: 1px solid #e5423e;
+}
+.app .el-input__inner[id="course-class"] + .el-input__suffix {
+  padding-right: 0.1rem !important;
+}
+.app .el-input__inner[id="course-class"] + .el-input__prefix {
+  display: none;
+}
+.app .el-radio-group[id="course-class"] {
+  position: relative;
+  display: block;
+  margin-bottom: 0.14rem;
+}
+.app .el-radio-group[id="course-class"] .el-radio__inner {
+  width: 0.16rem !important;
+  height: 0.16rem !important;
+}
+.app .el-radio-group[id="course-class"] .el-radio__label {
+  font-size: 0.18rem;
+}
+.app .el-radio-group[id="course-class"] .el-radio {
+  margin: 0.1rem 0.34rem 0.1rem 0;
+}
+.app .el-image-viewer__canvas {
+  max-height: 99vh;
+  margin: 0 auto;
+  position: relative;
+}
+.app .el-image-viewer__canvas > img {
+  width: auto;
+}
+.app #classRoomRecord .el-image-viewer__canvas > img {
+  max-height: 99vh;
+}
+.app .el-image-viewer__img {
+  position: relative;
+}
+.app .el-carousel__indicator button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.app .el-carousel__indicator.is-active button {
+  background-color: #fe5366;
+}
+.app .plan-detail-con .fullScreen #carouselPrintImg .el-carousel .el-carousel__container .el-image {
+  height: 100vh;
+}
+.app .plan-detail-con .activityDetail .el-image {
+  width: 100%;
+  height: 100%;
+}
+.app .plan-detail-con .el-image__error,
+.app .plan-detail-con .el-image__inner,
+.app .plan-detail-con .el-image__placeholder {
+  object-fit: scale-down;
+}
+.app #carouselPrintImg {
+  max-width: 99vw;
+  max-height: 99vh;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.app #carouselPrintImg .el-carousel {
+  height: 100vh;
+}
+.app #carouselPrintImg .el-carousel .el-carousel__container {
+  height: 100vh;
+  align-items: center;
+}
+.app #carouselPrintImg .el-carousel .el-carousel__container .el-carousel__arrow {
+  width: 0.44rem;
+  height: 0.44rem;
+  line-height: 0.44rem;
+  color: #fff;
+  background: rgba(178, 178, 178, 0.5);
+  font-size: 0.24em;
+}
+.app #carouselPrintImg .el-carousel .el-carousel__container .el-carousel__arrow:hover {
+  background: #b2b2b2;
+}
+.app #carouselPrintImg .el-carousel .el-carousel__container .el-carousel__arrow.el-carousel__arrow--left {
+  left: 86%;
+  top: 76%;
+}
+.app #carouselPrintImg .el-carousel .el-carousel__container .el-carousel__arrow.el-carousel__arrow--right {
+  left: calc(86% + 0.84rem);
+  top: 76%;
+}
+.app #carouselPrintImg .el-carousel .el-carousel__container .el-image {
+  width: 100%;
+  height: 80vh;
+  padding: 0 0.01rem;
+}
+.app .fullScreenBG #carouselPrintImg .el-carousel__arrow {
+  top: 90%;
+}
+.app .in-active-path {
+  color: #595e7c !important;
+}
+.app .el-cascader__dropdown:not(.teach_cascader_proper) .el-cascader-panel .el-cascader-menu {
+  background: white;
+  color: #595e7c;
+  width: 2rem;
+  min-width: auto;
+  box-shadow: 0px 0px 30px 0px rgba(205, 209, 214, 0.5);
+}
+.app .el-cascader__dropdown:not(.teach_cascader_proper) .el-cascader-panel .el-cascader-menu .el-cascader-menu__wrap {
+  height: 3rem;
+}
+.app .el-cascader__dropdown:not(.teach_cascader_proper) .el-cascader-panel .el-cascader-menu .el-cascader-node {
+  padding: 0;
+  height: 43px;
+  line-height: 43px;
+}
+.app .el-cascader__dropdown:not(.teach_cascader_proper) .el-cascader-panel .el-cascader-menu .el-cascader-node .in-active-path {
+  color: #595e7c !important;
+}
+.app .el-cascader__dropdown:not(.teach_cascader_proper) .el-cascader-panel .el-cascader-menu .el-cascader-node span {
+  font-size: 0.2rem;
+  padding: 10px;
+}
+.app .el-cascader__dropdown:not(.teach_cascader_proper) .el-cascader-panel .el-cascader-menu .el-cascader-node .el-cascader-node__prefix {
+  display: none;
+}
+.app .el-cascader__dropdown:not(.teach_cascader_proper) .el-cascader-panel .el-cascader-menu .el-cascader-node.is-active {
+  color: #595e7c !important;
+}
+.app .el-cascader__dropdown:not(.teach_cascader_proper) .el-cascader-panel .el-cascader-menu .el-scrollbar__bar div {
+  background: rgba(167, 172, 199, 0.2);
+}
+.app .el-cascader {
+  width: 100%;
+}
+.app .el-cascader .el-input .el-input__inner {
+  border-radius: 0px;
+  height: 67px;
+  border: 0;
+  border-bottom: 1px solid #999999;
+  padding: 0;
+  font-size: 0.25rem;
+  font-weight: bold;
+  color: #666666;
+}
+.app .el-cascader .el-input .el-input__inner:focus {
+  border-bottom: 1px solid #999999;
+}
+.app .el-message__icon {
+  font-size: 18px;
+}
+.app .el-dropdown-menu {
+  padding-bottom: 0;
+  border: 0;
+  border-radius: 0.1rem;
+}
+.app .el-dropdown-menu .el-dropdown-menu__item {
+  font-size: 0.22rem;
+  color: #2eb7ff;
+  padding: 0.1rem 0.3rem;
+  min-width: 1rem;
+}
+.app .el-dropdown-menu .el-dropdown-menu__item:focus,
+.app .el-dropdown-menu .el-dropdown-menu__item:not(.is-disabled):hover {
+  background: #e6e8ea;
+  color: #fff;
+}
+.app .el-dropdown-menu .popper__arrow {
+  margin-left: 0.1rem;
+}
+.app .el-icon-more:focus {
+  outline: none !important;
+}
+.app .el-select {
+  background: white;
+}
+.app .el-select .el-input .el-input__suffix {
+  padding-right: 0.1rem;
+}
+.app .el-select .el-input.is-focus .el-input__inner {
+  border-color: #e5423e;
+}
+.app .el-select .el-input__inner:focus {
+  border-color: #e5423e;
+}
+.app .el-select .el-input .el-select__caret {
+  background-size: 12px 8px;
+}
+.app .tbody-item[name="edit-process-toast"] .el-input__inner {
+  width: 1.1rem;
+  border: none;
+}
+.app .tbody-item[name="edit-process-toast"] .el-select .el-input .el-input__inner {
+  padding: 0;
+  border-radius: 0;
+}
+.app .tbody-item[name="edit-process-toast"]:hover .el-select .el-input .el-input__inner {
+  background-color: #fff7f7;
+}
+.app .tbody-item[name="edit-process-toast"] .el-select .el-input .el-input__suffix {
+  padding-right: 0rem;
+  right: 0;
+}
+.app .el-input--prefix .el-input__inner {
+  padding-left: 0.2rem;
+}
+.app .el-input__inner {
+  color: #0d0b22;
+  font-size: 0.18rem;
+  font-weight: 400;
+  font-family: PingFangSC-Regular, PingFang SC;
+  width: 1.6rem;
+  height: 0.44rem;
+  line-height: 0.44rem;
+  background: white;
+  padding: 0 0.2rem;
+}
+.app .el-select-dropdown {
+  z-index: 3333 !important;
+}
+.app .el-select-dropdown .el-select-dropdown__item {
+  font-size: 0.18rem;
+  color: #595e7c;
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+.app .el-select-dropdown .el-select-dropdown__item.selected {
+  font-weight: normal;
+  color: #e53e3e;
+  background-color: #fff;
+}
+.app .el-icon-arrow-up:before {
+  display: none;
+}
+.app .el-select .el-input .el-input__inner {
+  font-size: 0.18rem;
+  padding-left: 0.2rem;
+}
+.app .el-select .el-input .el-input__suffix {
+  padding-right: 0.2rem;
+}
+.app .el-select .el-input.is-focus .el-input__inner {
+  border-color: #e5423e;
+}
+.app .el-select .el-input__inner:focus {
+  border-color: #e5423e;
+}
+.app .el-select-dropdown__item {
+  color: #0d0b22;
+  font-size: 0.18rem;
+}
+.app .el-select-dropdown .el-select-dropdown__item:hover {
+  background-color: #d8d8d8;
+  color: #0d0b22;
+}
+.app .hover {
+  background-color: #d8d8d8;
+  color: #0d0b22;
+}
+.app .el-select-dropdown__list li {
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+.app .el-input__inner {
+  font-weight: normal;
+  height: 0.44rem;
+}
+.app .el-popper[x-placement^="bottom"] {
+  margin-top: 0.3rem;
+}
+.app .el-input__suffix {
+  right: -0.05rem;
+}
+.app .el-dialog {
+  margin-top: 0 !important;
+  margin-bottom: 0;
+  padding: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40%;
+  transform: translate(-50%, -50%);
+  box-shadow: none;
+}
+.app .el-dialog__wrapper {
+  position: fixed;
+}
+.app .el-dialog__wrapper .el-dialog .el-dialog__body input {
+  padding-bottom: 0;
+}
+.app .el-dialog__wrapper .el-dialog {
+  border-radius: 8px;
+}
+.app .el-dialog__wrapper .el-dialog .el-radio-group {
+  display: inline;
+}
+.app .el-dialog__wrapper .el-dialog .el-radio-group .el-radio {
+  width: 1.8rem;
+  margin: 0.05rem 0 0.25rem 0;
+}
+.app .el-dialog__header {
+  display: flex;
+  padding: 0.5rem 0.5rem 0.4rem;
+}
+.app .el-dialog__header .el-dialog__title {
+  font-size: 0.28rem;
+  color: #595e7c;
+  font-weight: 600;
+}
+.app .el-dialog__header .el-dialog__close {
+  display: none;
+}
+.app .el-dialog__body {
+  padding: 0 0.5rem;
+}
+.app .el-dialog__body label {
+  color: #595e7c;
+  display: inline-block;
+  font-size: 0.245rem;
+  min-width: 1.5rem;
+}
+.app .el-dialog__body label.center {
+  align-self: center;
+}
+.app .el-dialog__body .flex {
+  display: flex;
+}
+.app .el-dialog__body .item {
+  margin-bottom: 0.3rem;
+}
+.app .el-dialog__body .el-input__inner {
+  background: #f5f5f9;
+  border: 0;
+  color: #595e7c;
+  font-size: 0.24rem;
+  border-radius: 0.25rem;
+  padding-left: 0.3rem;
+  width: 3.5rem;
+  widows: 3.605rem;
+  height: 0.525rem;
+}
+.app .el-dialog__body .el-input__prefix {
+  display: none;
+}
+.app .el-dialog__body .last .el-input__inner {
+  width: 2rem;
+}
+.app .dialog-footer,
+.app .el-message-box__btns {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0.4rem 0.2rem 0;
+}
+.app .dialog-footer .el-button,
+.app .el-message-box__btns .el-button {
+  border: 0;
+  font-family: PingFangSC-Regular;
+  font-weight: bold;
+  font-size: 0.26rem;
+  padding: 0.14rem 0.5rem;
+  border-radius: 0.35rem;
+  background: #f5f5f9;
+  color: #fff;
+}
+.app .dialog-footer .el-button.guide_ok_btn,
+.app .el-message-box__btns .el-button.guide_ok_btn {
+  background: #e5423e;
+}
+.app .dialog-footer .btn-cancel,
+.app .el-message-box__btns .btn-cancel {
+  color: #595e7c;
+}
+.app .dialog-footer .btn-ok,
+.app .el-message-box__btns .btn-ok {
+  background: #e5423e;
+}
+.app .el-message-box__content {
+  margin-top: 20px;
+  padding: 0 0 0 0.5rem;
+  font-size: 0.26rem;
+  color: #595e7c;
+}
+.app .el-message-box__content .el-message-box__input {
+  padding: 0 0.5rem 0 0;
+}
+.app .el-message-box__content .el-message-box__input .el-input__inner {
+  border: 0;
+  border-bottom: 1px solid rgba(167, 172, 199, 0.2);
+  font-size: 0.26rem;
+  color: #595e7c;
+  padding: 0;
+  border-radius: 0;
+}
+.app .el-message-box__btns .el-button--small {
+  color: #595e7c;
+  border: 0;
+}
+.app .el-message-box__btns .el-button--primary {
+  background: #e5423e;
+  color: white;
+}
+.app .el-message {
+  padding: 15px 40px;
+  border-radius: 30px;
+  color: #fff;
+  font-family: PingFangSC-Regular;
+  background: #a7acc7;
+  z-index: 9999 !important;
+  min-width: auto;
+}
+.app .el-message .el-icon-info {
+  color: #fbfbfb;
+}
+.app .el-message .el-message__content {
+  color: #fbfbfb;
+  font-size: 0.26rem;
+  font-family: PingFangSC-Regular;
+}
+.app .el-message-box__wrapper {
+  position: absolute;
+}
+.app .el-message-box__wrapper img {
+  height: 1rem;
+  margin: 0 auto;
+  width: 1rem;
+  margin-top: 0.2rem;
+}
+.app .el-message-box__wrapper .el-message-box {
+  width: 6.4rem;
+  min-height: 3.38rem;
+  border-radius: 0.2rem;
+  padding: 0.3rem 0.5rem;
+  box-sizing: border-box;
+  position: relative;
+}
+.app .el-message-box__wrapper .el-message-box .el-message-box__message p {
+  color: #a7acc7;
+  font-weight: normal;
+  line-height: 1.6;
+}
+.app .el-message-box__wrapper .el-message-box .el-message-box__message p img {
+  margin-top: 0.5rem;
+}
+.app .el-message-box__wrapper .el-message-box .el-icon-close {
+  font-size: 0.3rem;
+}
+.app .el-message-box__wrapper .el-message-box .el-message-box__header {
+  padding: 0;
+}
+.app .el-message-box__wrapper .el-message-box .el-message-box__header .el-message-box__title {
+  font-weight: bold;
+  font-size: 0.3rem;
+  color: #595e7c;
+}
+.app .el-message-box__wrapper .el-message-box .el-message-box__header .el-message-box__headerbtn {
+  display: none;
+}
+.app .el-message-box__wrapper .el-message-box .el-message-box__content {
+  font-size: 0.26rem;
+  color: #a7acc7;
+  padding: 0;
+  padding-top: 0.3rem;
+}
+.app .el-message-box__wrapper .el-message-box .el-message-box__btns {
+  position: absolute;
+  padding: 0;
+  bottom: 0.3rem;
+  right: 0.5rem;
+}
+.app .el-message-box__wrapper .el-message-box .el-message-box__btns .el-button--default {
+  outline: none;
+  width: 1.52rem;
+  height: 0.54rem;
+  border-radius: 0.3rem;
+  font-size: 0.26rem;
+  background: #f5f5f9;
+  color: #595e7c;
+  border: none;
+}
+.app .el-message-box__wrapper .el-message-box .el-message-box__btns .el-button--primary {
+  background: #e43232;
+  color: white;
+  margin-left: 0.4rem;
+}
+.app .one-plan .el-checkbox {
+  margin-right: 0.38rem;
+}
+.app .one-plan .progress .el-checkbox {
+  margin-right: 0.2rem;
+}
+.app .one-plan .progress .el-checkbox:last-child {
+  margin-right: 0;
+}
+.app .el-checkbox {
+  height: 0.26rem;
+  margin: 0.1rem 0.5rem 0.1rem 0;
+  outline: none;
+}
+.app .el-checkbox .el-checkbox__inner {
+  width: 0.26rem;
+  height: 0.26rem;
+  border-radius: 0.04rem;
+  border: none;
+  background: #f5f5f9;
+  position: relative;
+}
+.app .el-checkbox .el-checkbox__label {
+  color: #a7acc7;
+  font-size: 0.25rem;
+}
+.app .el-checkbox .el-checkbox__input.is-checked .el-checkbox__inner {
+  background: white;
+  font-size: 0;
+}
+.app .el-checkbox .el-checkbox__inner::after {
+  border-radius: 0.04rem;
+  transform: none;
+  display: none;
+}
+.app .el-checkbox .el-checkbox__input.is-checked::after {
+  content: "";
+  position: absolute;
+  text-align: center;
+  left: 0;
+  display: inline-block;
+  font-size: 0.4rem;
+  width: 0.3rem;
+  background-color: #f5f5f9;
+  background-repeat: no-repeat;
+  background-size: 0.3rem 0.3rem;
+  background-position: 50% 50%;
+  height: 0.3rem;
+  transform: none;
+  z-index: 1;
+  border: none;
+}
+.app .el-checkbox .el-checkbox__input.is-checked + .el-checkbox__label {
+  color: #595e7c;
+}
+.app .el-checkbox .el-checkbox__input.is-checked + .el-checkbox__label .el-progress__text {
+  color: #595e7c !important;
+}
+.app .el-checkbox .el-checkbox__inner:hover {
+  border: none;
+}
+.app .el-radio {
+  margin: 0.1rem 0.1rem 0.1rem 0;
+}
+.app .el-radio .el-radio__inner {
+  width: 0.26rem;
+  height: 0.26rem;
+  border: none;
+  background: rgba(167, 172, 199, 0.2);
+  margin-bottom: 0.05rem;
+}
+.app .el-radio .is-checked .el-radio__inner {
+  width: 0.26rem;
+  height: 0.26rem;
+  border: none;
+  background-color: white;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+.app .el-radio .is-checked .el-radio__inner::after {
+  width: 0;
+}
+.app .el-radio .el-radio__label {
+  font-size: 0.26rem;
+  color: #595e7c !important;
+  font-family: PingFangSC-Regular;
+}
+.app .el-radio.is-checked .el-radio__label {
+  font-weight: bold;
+}
+.app .el-icon-caret-right:not(.is-leaf):before {
+  color: #0d0b22 !important;
+}
+.app .el-tree-node__content > .el-tree-node__expand-icon {
+  transform: scale(1.3) !important;
+}
+.app .el-tree-node__expand-icon.expanded {
+  transform: scale(1.3) rotate(90deg) !important;
+}
+.app .el-tree-node__content {
+  height: 0.8rem;
+}
+.app .el-pagination.is-background .el-pager li:not(.disabled).active {
+  background: #e5423e;
+}
+.app .my_management_tabs .el-tabs__item.is-active {
+  color: #e5423e;
+}
+.app .my_management_tabs .website-con .el-tabs__active-bar {
+  height: 0.02rem;
+}
+.app .my_management_tabs .website-con .tab-con .el-tabs__nav-scroll {
+  padding: 0;
+}
+.app .el-tabs__active-bar {
+  transition: all 0s;
+}
+.app .my_management_tabs .el-tabs__active-bar {
+  background-color: #e5423e;
+  width: 0.63rem;
+  height: 4px;
+  border-radius: 4px;
+}
+.app .my_management_tabs .el-tabs__item:hover {
+  color: #e5423e;
+}
+.app .my_management_tabs.el-tabs__header {
+  margin-top: -0.5rem;
+}
+.app .my_management_tabs .fixed {
+  padding-left: 0;
+  margin-left: 0;
+}
+.app .my_management_tabs .fixed .el-tabs .el-tabs__header {
+  padding: 0 0.35rem;
+  margin-bottom: 0;
+  height: 0.89rem;
+  background: #fcfcfc;
+}
+.app .my_management_tabs .fixed .el-tabs .el-tabs__nav-wrap::after {
+  background-color: #ffffff;
+}
+.app .my_management_tabs .fixed .el-tabs .el-tabs__nav-wrap .el-tabs__item {
+  height: 0.4rem;
+  font-size: 0.18rem;
+  padding: 0 0.6rem 0 0;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6e6d7a;
+  line-height: 0.18rem;
+}
+.app .my_management_tabs .fixed .el-tabs .el-tabs__nav-wrap .el-tabs__item.is-active {
+  font-weight: bold;
+  color: #e5423e;
+}
+.app .my_management_tabs .fixed .el-tabs .el-tabs__nav {
+  height: 0.89rem;
+  line-height: 0.33rem;
+}
+.app .my_management_tabs .fixed .el-tabs .el-tabs__nav .el-tabs__item:focus.is-active.is-focus:not(:active) {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.app .my_management_tabs .fixed .only_one_item .el-tabs__nav-wrap .el-tabs__item {
+  font-size: 0.18rem;
+  padding-right: 0rem;
+}
+.app .introjs-tooltiptext {
+  font-size: 0.2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+.app .introjs-tooltip {
+  background-color: transparent;
+  box-shadow: none;
+}
+.app .introjs-donebutton {
+  display: none;
+}
+.app .search-div.introjs-fixParent {
+  transform: translate(-50%, -60%) !important;
+  z-index: 2001 !important;
+}
+.app .el-dialog.introjs-fixParent {
+  transform: translate(-50%, -50%) !important;
+  z-index: 3001 !important;
+}
+.app .full-screen-guide-dialog {
+  position: fixed;
+  z-index: 1000000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.app .full-screen-guide-content {
+  color: #fff;
+  font-size: 24px;
+  letter-spacing: 1px;
+  line-height: 30px;
+  width: 6.2rem;
+  height: 6rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.app .full-screen-guide-content .full_tip_btn {
+  position: absolute;
+  cursor: pointer;
+  top: 42%;
+  left: 50%;
+  width: 2.15rem;
+  height: 0.61rem;
+  z-index: 1;
+  color: red;
+  transform: translateX(-50%);
+}
+.app .full-screen-guide-btn {
+  display: block;
+}
+.app .w_100 {
+  width: 100%;
+}
+.app .w_100 .el-input__inner {
+  width: 100%;
+}
+.app .target_select .el-input__inner {
+  width: 100%;
+}
+.app .operation_desk_left .el-tabs__active-bar {
+  background-color: #e5423e;
+}
+.app .operation_desk_left .el-tabs__item.is-active {
+  box-shadow: none;
+  color: #e5423e;
+}
+.app .operation_desk_left .el-tabs__item:hover {
+  color: #e5423e;
+}
+.app .operation_desk_left .el-tabs__item:focus.is-active.is-focus:not(:active) {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.app .teach_cascader_proper.el-popper {
+  margin-top: 12px;
+}
+.app .teach_cascader_proper.el-popper .el-cascader-panel .el-cascader-menu {
+  background: white;
+  color: #595e7c;
+  width: 2rem;
+  min-width: auto;
+}
+.app .teach_cascader_proper.el-popper .el-cascader-panel .el-cascader-menu .el-cascader-menu__wrap {
+  height: 3rem;
+}
+.app .teach_cascader_proper.el-popper .el-cascader-panel .el-cascader-menu .el-cascader-node {
+  padding: 0;
+  height: 43px;
+  line-height: 43px;
+}
+.app .teach_cascader_proper.el-popper .el-cascader-panel .el-cascader-menu .el-cascader-node.in-active-path span {
+  color: #e53e3e;
+}
+.app .teach_cascader_proper.el-popper .el-cascader-panel .el-cascader-menu .el-cascader-node span {
+  font-size: 0.16rem;
+  padding: 0.1rem;
+}
+.app .teach_cascader_proper.el-popper .el-cascader-panel .el-cascader-menu .el-cascader-node .el-cascader-node__postfix {
+  right: 0.05rem;
+}
+.app .teach_cascader_proper.el-popper .el-cascader-panel .el-cascader-menu .el-cascader-node.is-active {
+  color: #e53e3e;
+}
+.app .teach_cascader_proper.el-popper .el-cascader-panel .el-cascader-menu .el-scrollbar__bar div {
+  background: rgba(167, 172, 199, 0.2);
+}
+.app .select_wrap .el-cascader.item_content {
+  line-height: normal;
+}
+.app .select_wrap .el-cascader.item_content .el-input.is-disabled .el-input__inner {
+  padding-left: 0.2rem;
+  background: #fff;
+}
+.app .select_wrap .el-cascader.item_content .el-input .el-input__suffix {
+  right: 0.05rem;
+}
+.app .select_wrap .el-cascader.item_content .el-input .el-input__suffix .el-icon-arrow-down {
+  background-size: 12px 8px;
+  transform: rotate(180deg);
+}
+.app .select_wrap .el-cascader.item_content .el-input .el-input__suffix .el-icon-arrow-down::before {
+  content: "";
+}
+.app .select_wrap .el-cascader.item_content .el-input .el-input__suffix .is-reverse {
+  transform: rotate(0deg);
+}
+.app .select_wrap .el-cascader.item_content .el-input .el-input__suffix .is-reverse::before {
+  content: "";
+}
+.app .select_wrap .el-cascader.item_content .el-input .el-input__inner {
+  width: 100%;
+  border: none;
+  height: 0.44rem;
+  line-height: 0.44rem;
+  border-radius: 0.08rem;
+  padding: 0 0.2rem;
+  font-size: 0.16rem;
+  font-weight: normal;
+}
+.app .select_wrap .el-cascader.item_content .el-input .el-input__inner::placeholder {
+  font-size: 0.16rem;
+  color: #6e6d7a;
+}
+.app .el-carousel__arrow {
+  background-color: rgba(31, 45, 61, 0.3);
+  font-size: 0.4rem;
+  width: 0.56rem;
+  height: 0.56rem;
+}
+.app .el-carousel__arrow:hover {
+  background-color: rgba(31, 45, 61, 0.6);
+}
+.app .el-carousel__arrow.el-carousel__arrow--left {
+  left: 0.4rem;
+}
+.app .el-carousel__arrow.el-carousel__arrow--right {
+  right: 0.4rem;
+}
+.app #operatiomDeskRightFormWrap .prefixSlot {
+  width: 0.45rem;
+  height: 0.24rem;
+  background: #ffccc6;
+  border-radius: 0.04rem;
+  text-align: center;
+  font-size: 0.14rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #e5533d;
+  line-height: 0.24rem;
+  margin-left: 0rem;
+}
+.app .prefixSlot {
+  width: 0.45rem;
+  height: 0.24rem;
+  background: #ffccc6;
+  border-radius: 0.04rem;
+  text-align: center;
+  font-size: 0.14rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #e5533d;
+  line-height: 0.24rem;
+  margin-top: 0.08rem;
+  margin-left: 0.2rem;
+}
+.app .item_content .el-input__inner[id="course-class"] + .el-input__prefix {
+  display: block;
+}
+.app .item_content .el-input__inner[id="course-class"] + .el-input__prefix .prefixSlot {
+  width: 0.45rem;
+  height: 0.24rem;
+  background: #ffccc6;
+  border-radius: 0.04rem;
+  text-align: center;
+  font-size: 0.14rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #e5533d;
+  line-height: 0.24rem;
+  margin-left: 0.15rem;
+  margin-top: 0.1rem;
+  display: inline-block;
+}
+.app .item_content .el-input.is-focus:focus {
+  border-color: #fff;
+}
+.app .item_content .el-textarea__inner:focus {
+  border-color: #c0c4cc;
+}
+.app .item_content.border_top_none .el-textarea__inner[id="course-class"] {
+  border-top: none;
+}
+.app .item_content.is-disabled .el-textarea__inner[id="course-class"] {
+  background: #fff;
+}
+.app .item_content .item_content.el-textarea.is-disabled .el-textarea__inner {
+  background: #fff;
+}
+.app .item_content .el-textarea__inner[id="course-class"] {
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  font-size: 0.18rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #0d0b22;
+  padding-top: 2px;
+}
+.app .item_content .el-input__inner[id="course-class"] {
+  width: 100%;
+  border-left: none;
+  border: none;
+  padding-right: 0.34rem;
+  border-radius: 0;
+  height: 0.32rem;
+  line-height: 0.32rem;
+  font-size: 0.16rem;
+  border-right: 1px solid #bfbfbf;
+}
+.app .item_content .el-textarea__inner::-webkit-scrollbar {
+  width: 0.105rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 0.06rem;
+  height: 0.105rem !important;
+}
+.app .item_content .el-textarea__inner::-webkit-scrollbar-thumb {
+  background: rgba(52, 60, 107, 0.1);
+  border-radius: 0.06rem;
+}
+.app .item_content .el-textarea__inner::placeholder {
+  font-size: 0.14rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #c4c4c4;
+}
+.app .item_content .el-input.is-disabled {
+  background-color: #fff;
+}
+.app .item_content .el-input.is-disabled .el-input__suffix {
+  display: none;
+}
+.app .item_content .el-textarea__inner[id="course-class"] {
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  font-size: 0.16rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #0d0b22;
+  padding-top: 0.12rem;
+  border: none;
+  height: 1.5rem;
+  text-indent: 0rem;
+  padding-left: 0.2rem;
+  padding-right: 0.15rem;
+}
+.app .editable .el-textarea__inner[id="course-class"] {
+  height: 1.13rem;
+  text-indent: 0rem;
+  padding-right: 0.2rem;
+  padding-left: 0.72rem;
+}
+.app .has_indexnt .el-textarea__inner[id="course-class"] {
+  padding-left: 0.72rem;
+}
+.app .el-input-no-right-border .el-input__inner[id="course-class"] {
+  border-right: none;
+}
+.app #operatiomDeskRightFormWrap .item_content .el-textarea__inner[id="course-class"] {
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #0d0b22;
+  padding-top: 0.12rem;
+  border: none;
+  height: 1.5rem;
+  text-indent: 0rem;
+  font-size: 0.16rem;
+}
+.app #operatiomDeskRightFormWrap .editable .el-textarea__inner[id="course-class"] {
+  height: 1.13rem;
+  text-indent: 0rem;
+  padding-left: 0.72rem;
+  padding-right: 0.2rem;
+}
+.app #operatiomDeskRightFormWrap .has_indexnt .el-textarea__inner[id="course-class"] {
+  text-indent: 0.6rem;
+  line-height: 0.26rem;
+  padding-left: 0.18rem;
+}
+.app .lang_target_select.el-select .el-input .el-input__suffix {
+  padding-right: 0 !important;
+  right: 0.05rem;
+}
+.app .lang_target_select .el-input__inner[id="course-class"] {
+  text-overflow: ellipsis;
+  padding-right: 0.2rem;
+  border: none;
+  height: 0.43rem;
+  line-height: 0.43rem;
+}
+.app .lang_target_select .el-input__inner[id="course-class"]::placeholder {
+  font-size: 0.16rem;
+  color: #6e6d7a;
+}
+.app .lang_target_select .el-input__inner[id="course-class"] .el-input__suffix {
+  right: 5px;
+}
+.app .lang_target_select .el-input__inner[id="course-class"] .el-input__suffix .el-icon-arrow-down {
+  background-size: 12px 8px;
+  transform: rotate(180deg);
+}
+.app .lang_target_select .el-input__inner[id="course-class"] .el-input__suffix .el-icon-arrow-down::before {
+  content: "";
+}
+.app .lang_target_select .el-input__inner[id="course-class"] .el-input__suffix .is-reverse {
+  transform: rotate(0deg);
+}
+.app .lang_target_select .el-input__inner[id="course-class"] .el-input__suffix .is-reverse::before {
+  content: "";
+}
+.app .has_target_tag .el-input__inner[id="course-class"] {
+  border-right: none;
+  height: 0.43rem;
+  line-height: 0.43rem;
+  box-sizing: border-box;
+  padding-left: 0.72rem;
+  border: none;
+}
+.app .lang_target_select.has_target_tag .el-input .el-input__suffix {
+  padding-right: 0.1rem;
+}
+.app .course_target_form .el-form-item__content {
+  position: static;
+}
+/* 公用字体大小 */
+.fz22 {
+  font-size: 0.22rem;
+}
+.fz24 {
+  font-size: 0.24rem;
+}
+.fz26 {
+  font-size: 0.26rem;
+}
+.fz30 {
+  font-size: 0.3rem;
+}
+.fz36 {
+  font-size: 0.36rem;
+}
+.fz40 {
+  font-size: 0.4rem;
+}
+/* 滚动条样式 */
+.scrollCon {
+  overflow: auto;
+}
+.no-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+.no-scroll::-webkit-scrollbar-thumb {
+  width: 0;
+  height: 0;
+  display: none;
+}
+.scrollCon::-webkit-scrollbar {
+  width: 0.105rem;
+  background: white;
+}
+.scrollCon::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 0.06rem;
+}
+/* 隐藏滚动条 */
+.scrollCon:hover::-webkit-scrollbar {
+  background: rgba(255, 255, 255, 0.5);
+  width: 0.105rem;
+  border-radius: 0.06rem;
+  height: 0.105rem !important;
+}
+.scrollCon:hover::-webkit-scrollbar-thumb {
+  background: rgba(52, 60, 107, 0.1);
+  border-radius: 0.06rem;
+}
+/* 滚动条样式 */
+.scrollConInspire {
+  overflow: auto;
+}
+.scrollConInspire::-webkit-scrollbar {
+  width: 0.105rem;
+  background: rgba(167, 172, 199, 0);
+  border-radius: 0.06rem;
+  position: absolute;
+}
+.scrollConInspire::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 0.06rem;
+}
+/* 隐藏滚动条 */
+.scrollConInspire:hover::-webkit-scrollbar {
+  background: rgba(167, 172, 199, 0);
+}
+.scrollConInspire:hover::-webkit-scrollbar-thumb {
+  background: 55, 255, 255, 0.2;
+}
+.hide-scrooll-bar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+/* card */
+.search .el-card {
+  border: 0;
+}
+#app .el-message__icon {
+  display: none;
+}
+.register .el-dropdown {
+  display: block;
+}
+.register .el-dropdown .el-dropdown-menu {
+  display: block;
+}
+.register .el-dropdown .el-dropdown-menu .el-dropdown-menu__item {
+  width: 4rem !important;
+}
+.register .el-cascader__dropdown {
+  font-size: 20px;
+}
+body .el-loading-mask {
+  position: absolute !important;
+  background: transparent !important;
+  z-index: 9999;
+}
+body .el-loading-mask .el-loading-spinner {
+  bottom: 1.5rem;
+}
+body .el-loading-mask .el-icon-loading {
+  color: #595e7c;
+  font-size: 0.7rem;
+}
+body .el-loading-mask .el-loading-text {
+  color: #595e7c;
+  font-size: 0.18rem;
+  margin-top: -0.15rem;
+  font-family: PingFangSC-Regular;
+  letter-spacing: 0.015rem;
+}
+.el-popup-parent--hidden .el-message-box__wrapper .imgBox {
+  width: 5.33rem;
+  height: 5.49rem;
+  padding: 0.4rem;
+  text-align: center;
+}
+.el-popup-parent--hidden .el-message-box__wrapper .imgBox .el-message-box__header .el-message-box__headerbtn {
+  display: block;
+}
+.el-popup-parent--hidden .el-message-box__wrapper .imgBox .el-button {
+  display: none;
+}
+.el-popup-parent--hidden .el-message-box__wrapper .imgBox img {
+  width: 2.45rem;
+}
+.el-popup-parent--hidden .el-message-box__wrapper .imgBox p {
+  font-size: 0.36rem;
+  font-weight: 400;
+  color: #406581;
+  line-height: 0.36rem;
+  margin: 0.3rem 0 0.4rem 0;
+}
+.el-popup-parent--hidden .el-message-box__wrapper .imgBox p img {
+  width: 2.45rem;
+}
+.el-popup-parent--hidden .el-message-box__wrapper .imgBox .el-message-box__content {
+  padding: 0;
+  margin-top: 0.8rem;
+}
+.el-table::before {
+  height: 0 !important;
+}
+.el-table td {
+  border-bottom: 1px solid #ebeef5;
+}
+.el-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+.area_target_panel .el-table tbody tr:last-child td {
+  border-bottom: 1px solid #ebeef5 !important;
+}
+.area_target_panel .el-table--scrollable-y .el-table__body-wrapper::-webkit-scrollbar {
+  width: 0.105rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 0.06rem;
+  height: 0.105rem !important;
+}
+.area_target_panel .el-table--scrollable-y .el-table__body-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(52, 60, 107, 0.1);
+  border-radius: 0.06rem;
+}
+.area_target_panel .has-gutter .gutter {
+  width: 0.105rem !important;
+}
+.el-progress-bar__inner {
+  line-height: normal !important;
+}
+.guide_wrapper {
+  font-size: 14px;
+}
+.guide_wrapper a,
+.guide_wrapper span {
+  font-size: 14px;
+}
+.introjs-helperLayer {
+  background: transparent;
+}
+.introjs-overlay {
+  opacity: 0 !important;
+}
+.introjs-helperLayer:before {
+  opacity: 0;
+  content: "";
+  position: fixed;
+  width: inherit;
+  height: inherit;
+  box-shadow: 0 0 0 1000em rgba(0, 0, 0, 0.7);
+  opacity: 1;
+}
+.introjs-helperLayer:after {
+  content: "";
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 1000;
+}
+.introjs-arrow {
+  display: none !important;
+}
+.introjs-tooltip {
+  background-color: transparent;
+  box-shadow: none;
+  max-width: 1000px;
+}
+.tip_img,
+.tip_img_to_full {
+  width: 6.2rem;
+}
+.introjs-left .tip_img_to_full {
+  transform: translate(0%, -30%);
+}
+.introjs-left .tip_img_comfirm_add {
+  transform: translate(0%, -20%);
+  width: 6.2rem;
+}
+.introjs-right .tip_to_save_img {
+  transform: translateY(-65%);
+  width: 6.2rem;
+}
+.introjs-right .tip_img_knPic2 {
+  transform: translateY(0%);
+  width: 6.2rem;
+}
+.introjs-right .tip_file_img {
+  transform: translateY(0%);
+  width: 6.2rem;
+}
+.introjs-right .tip_file_img {
+  transform: translateY(0%);
+  width: 6.2rem;
+}
+.el-progress-bar__outer {
+  background-color: #dedede;
+}
+.el-progress-bar__inner {
+  border-radius: 0;
+}
+@media screen and (max-width: 1500px) {
+  #lookMaterialGuide {
+    transform: translateY(-45%) !important;
+  }
+}
