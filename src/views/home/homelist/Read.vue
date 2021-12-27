@@ -32,7 +32,9 @@
         v-for="(item, index) in read_list"
         :key="index"
         :citem="item"
-      ></material>
+        @handleRead="rhandleRead"
+      >
+      </material>
     </div>
   </div>
 </template>
@@ -63,6 +65,18 @@ export default {
     backlast() {
       this.$router.back();
     },
+    rhandleRead(citem) {
+      localStorage.setItem("readList", JSON.stringify(this.read_list));
+      this.$router.push({
+        path: "/materialdetail",
+        query: {
+          id: citem.contentId,
+          type: citem.contentType,
+          specialId: this.id,
+        },
+      });
+    },
+
     // 上面标题
     getSpecialContentFun() {
       getSpecialContent({ id: this.id }).then((res) => {

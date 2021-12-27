@@ -22,25 +22,69 @@
           <div class="read_intro">{{ topwrap.description }}</div>
         </div>
       </div>
+      <!-- 上底部 -->
+      <div class="top_more">查看更多</div>
       <!-- 班级选择 -->
+      <div class="top_bottom">
+        <div
+          class="top_class"
+          v-for="(item, index) in topclass"
+          :key="index"
+          @click="handleclass(index, item)"
+          :class="{ active: classindex == index }"
+        >
+          {{ item.name }}
+        </div>
+      </div>
     </div>
     <!-- 下 -->
-    <div class="base_content"></div>
+    <div class="base_content">
+      <el-collapse @change="handleChange" v-model="activeNames" accordion>
+        <el-collapse-item
+          :title="item.name"
+          v-for="(item, index) in baseDetail"
+          :key="index"
+          :name="index"
+        >
+          <div class="base_title">
+            <material
+              v-for="(item1, index) in item.class"
+              :key="index"
+              :citem="item1"
+            ></material>
+          </div>
+        </el-collapse-item>
+      </el-collapse>
+    </div>
   </div>
 </template>
 
 <script>
-import { getSerialsDetail } from "@/api/home";
+import Material from "@/components/Material";
+import { getSerialsDetail, getThemeSerial } from "@/api/home";
 export default {
   data() {
     return {
       id: "",
       topwrap: {},
+      topclass: [
+        { name: "小班", id: 16 },
+        { name: "中班", id: 32 },
+        { name: "大班", id: 64 },
+      ],
+      classindex: 0,
+      age: 16,
+      activeNames: [0],
+      baseDetail: [],
     };
+  },
+  components: {
+    Material,
   },
   mounted() {
     this.id = this.$route.query.id;
     this.getSerialsDetailFun();
+    this.getThemeSerialFun();
   },
   methods: {
     backlast() {
@@ -48,9 +92,27 @@ export default {
     },
     getSerialsDetailFun() {
       getSerialsDetail({ project: this.id }).then((res) => {
-        console.log(res);
+        // console.log(res);
         this.topwrap = res.data;
       });
+    },
+    handleclass(index, item) {
+      this.classindex = index;
+      this.age = item.id;
+      this.getThemeSerialFun();
+    },
+    getThemeSerialFun() {
+      getThemeSerial({
+        age: this.age,
+        project: this.id,
+      }).then((res) => {
+        console.log(res);
+        this.baseDetail = res.data.theme;
+        console.log(this.baseDetail);
+      });
+    },
+    handleChange(val) {
+      console.log(val);
     },
   },
 };
@@ -58,7 +120,10 @@ export default {
 
 <style lang="less">
 .base {
+  display: flex;
+  flex-direction: column;
   .base_nav {
+    // display: flex;
     .base_top {
       display: flex;
       justify-content: flex-start;
@@ -120,8 +185,54 @@ export default {
         }
       }
     }
+    .top_more {
+      text-align: center;
+      font-size: 16px;
+      color: #6e6d7a;
+      cursor: pointer;
+    }
+    .top_bottom {
+      margin-left: 32px;
+      margin-top: 40px;
+      display: flex;
+      .top_class {
+        font-size: 18px;
+        margin-right: 60px;
+        color: #6e6d7a;
+        height: 50px;
+        cursor: pointer;
+      }
+      .active {
+        color: #e5423e;
+        position: relative;
+        &::after {
+          content: "";
+          width: 100%;
+          height: 6px;
+          background: #e5423e;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          border-radius: 3px;
+        }
+      }
+    }
   }
   .base_content {
+    background: #f5f5fb;
+    padding: 32px;
+    .el-collapse-item__header {
+      padding-left: 35px;
+    }
+    .el-collapse-item__header.is-active {
+      color: #e5423e;
+      background: #f7f7f9;
+    }
+    .base_title {
+      display: flex;
+      flex-wrap: wrap;
+      background: #f7f7f9;
+    }
   }
 }
 </style>

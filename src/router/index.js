@@ -57,6 +57,14 @@ const homeRouterMap = [
           import(
             /* webpackChunkName: "baseread" */ "../views/home/homelist/BaseRead.vue"
           )
+      },
+      {
+        path: "materialdetail",
+        name: "MaterialDetail",
+        component: () =>
+          import(
+            /* webpackChunkName: "materialdetail" */ "../views/home/homelist/MaterialDetail.vue"
+          )
       }
     ]
   }

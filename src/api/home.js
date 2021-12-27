@@ -1,5 +1,7 @@
 import Request from "@/common/request";
 
+// 主页
+
 // 获取轮播图
 export const getBannerList = (data) => Request.post("/api_banner/index", data);
 
@@ -42,3 +44,28 @@ export const searchSerialsSome = data =>
 // 单个系列详情
 export const getSerialsDetail = data =>
   Request.post("/api_material/detail_serial", data);
+
+// 单个系列某个年级课程结构
+export const getThemeSerial = data =>
+  Request.post("/api_material/theme_serial", data);
+
+//获取单个绘本详情
+export const getPicBooksDetail = data =>
+  Request.post("/api_book/get_book_detail", data);
+
+// 获取图片或者音频
+export const getMaterialDetail = (data, headers) => {
+  return Request.get("/maxwell/v1.0/material/materialDetail", data, headers);
+};
+
+// 库内资源分享b端
+export const getMaterialQRcode = (data, headers) => {
+  return Request.get("/maxwell/v1.0/resource/qrcode", data, headers);
+};
+
+// 收藏
+
+//收藏列表
+export const newCellectionList = (data, headers) => {
+  return Request.get("/maxwell/v1.0/favorites/list", data, headers);
+};
