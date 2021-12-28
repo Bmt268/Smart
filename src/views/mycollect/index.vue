@@ -91,6 +91,7 @@ export default {
           query: { special_id: citem.contentId },
         });
       } else {
+        localStorage.setItem("readList", JSON.stringify(this.collect_content));
         this.$router.push({
           path: "/materialdetail",
           query: {
@@ -102,16 +103,17 @@ export default {
     },
     newCellectionListFun() {
       newCellectionList({ type: this.collect_type }).then((res) => {
-        console.log(res);
         this.collect_content = res.data;
       });
     },
   },
   mounted() {
     this.collect_type = localStorage.getItem("collect") || this.tags[0].type;
-    this.navindex = this.tags.findIndex((item) => {
-      return item.type == localStorage.getItem("collect");
-    });
+    this.navindex = localStorage.getItem("collect")
+      ? this.tags.findIndex((item) => {
+          return item.type == localStorage.getItem("collect");
+        })
+      : 0;
     this.newCellectionListFun();
   },
 };

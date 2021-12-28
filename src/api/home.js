@@ -63,6 +63,13 @@ export const getMaterialQRcode = (data, headers) => {
   return Request.get("/maxwell/v1.0/resource/qrcode", data, headers);
 };
 
+//获取用户所在班级
+export const getClasses = data =>
+  Request.get("/maxwell/v1.0/schedule/user/rooms", data);
+
+// 获取个人信息
+export const getUserInfo = data => Request.post("/api_user/info", data);
+
 // 收藏
 
 //收藏列表

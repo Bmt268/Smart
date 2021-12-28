@@ -75,7 +75,7 @@ export default {
   methods: {
     getBannerListFun() {
       getBannerList({ need_first: 1 }).then((res) => {
-        console.log(res);
+        // console.log(res);
         this.bannerlist = res.data;
       });
     },
