@@ -76,3 +76,6 @@ export const getUserInfo = data => Request.post("/api_user/info", data);
 export const newCellectionList = (data, headers) => {
   return Request.get("/maxwell/v1.0/favorites/list", data, headers);
 };
+
+//更换头像
+export const changeHead = data => Request.post("/api_user/headimg", data);
