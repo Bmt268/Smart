@@ -1,6 +1,6 @@
 <template>
   <div id="ku">
-    <div class="aside">
+    <div class="aside" v-if="!hiddenlist.includes($route.name)">
       <div class="avatar">
         <img src="" alt="" />
       </div>
@@ -69,7 +69,7 @@
       </nav>
     </div>
     <div class="content">
-      <top-nav></top-nav>
+      <top-nav v-if="!hiddenlist.includes($route.name)"></top-nav>
       <router-view></router-view>
     </div>
   </div>
@@ -78,8 +78,16 @@
 <script>
 import TopNav from "@/components/TopNav";
 export default {
+  data() {
+    return {
+      hiddenlist: ["HistoryList"],
+    };
+  },
   components: {
     TopNav,
+  },
+  mounted() {
+    console.log(this.$route);
   },
 };
 </script>

@@ -61,10 +61,16 @@ export default {
   components: {
     Material,
   },
+  mounted() {
+    this.id = this.$route.query.special_id;
+    this.getSpecialContentFun();
+    this.getSpecialImgFun();
+  },
   methods: {
     backlast() {
       this.$router.back();
     },
+    // 父传子  点击跳转
     rhandleRead(citem) {
       localStorage.setItem("readList", JSON.stringify(this.read_list));
       this.$router.push({
@@ -76,11 +82,9 @@ export default {
         },
       });
     },
-
     // 上面标题
     getSpecialContentFun() {
       getSpecialContent({ id: this.id }).then((res) => {
-        console.log(res);
         this.readtop = res.data.pack;
       });
     },
@@ -94,11 +98,10 @@ export default {
         type: 5,
       };
       getSpecialImg(params).then((res) => {
-        // console.log(res);
         this.read_list = res.data.list;
       });
     },
-    // 收藏
+    // 加收藏
     newAddCellectionFun() {
       let params = {
         sourceId: this.id,
@@ -113,6 +116,7 @@ export default {
         });
       });
     },
+    // 取消收藏
     newDleCellectionFun() {
       let params = {
         sourceId: this.id,
@@ -127,17 +131,13 @@ export default {
         });
       });
     },
+    // 点击添加收藏
     handleAdd() {
       this.readtop.collect
         ? this.newDleCellectionFun()
         : this.newAddCellectionFun();
       this.getSpecialContentFun();
     },
-  },
-  mounted() {
-    this.id = this.$route.query.special_id;
-    this.getSpecialContentFun();
-    this.getSpecialImgFun();
   },
 };
 </script>

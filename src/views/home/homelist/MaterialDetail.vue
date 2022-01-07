@@ -11,7 +11,7 @@
           <iframe
             :src="bookDetail.url"
             frameborder="0"
-            v-if="type == 2"
+            v-if="type == 2 || type == 0"
           ></iframe>
           <img :src="bookDetail.coverImageUrl" alt="" v-if="type == 1" />
         </div>
@@ -39,7 +39,13 @@ import IconTools from "@/components/IconTools";
 import Rotation from "@/components/Rotation";
 import VerticalTab from "@/components/VerticalTab";
 
-import { getPicBooksDetail, getMaterialDetail } from "@/api/home";
+import {
+  getPicBooksDetail,
+  getMaterialDetail,
+  getActivityDetail,
+  getVideoDetail,
+  getGameDetail,
+} from "@/api/home";
 
 export default {
   data() {
@@ -70,6 +76,9 @@ export default {
     initdata() {
       this.type == 2 && this.getPicBooksDetailFun();
       this.type == 1 && this.getMaterialDetailFun();
+      this.type == 0 && this.getActivityDetailFun();
+      this.type == 10 && this.getGameDetailFun();
+      this.type == 9 && this.getVideoDetailFun();
     },
     // 绘本接口
     async getPicBooksDetailFun() {
@@ -95,6 +104,38 @@ export default {
         console.log(this.bookCollect);
       });
     },
+    // 活动接口
+    getActivityDetailFun() {
+      let params = {
+        aid: this.id,
+      };
+      getActivityDetail(params).then((res) => {
+        this.bookDetail = res.data;
+        this.bookCollect = res.data.collect;
+      });
+    },
+    // 游戏接口
+    getGameDetailFun() {
+      let params = {
+        mid: this.id,
+        specialId: this.specialId,
+      };
+      getGameDetail(params).then((res) => {
+        this.bookDetail = res.data;
+        this.bookCollect = res.data.collect;
+      });
+    },
+    // 视频接口
+    getVideoDetailFun() {
+      let params = {
+        mid: this.id,
+        specialId: this.specialId,
+      };
+      getVideoDetail(params).then((res) => {
+        this.bookDetail = res.data;
+        this.bookCollect = res.data.collect;
+      });
+    },
     // 点击收藏
     handleAdd() {
       this.initdata();
@@ -102,6 +143,7 @@ export default {
     // 点击轮播图
     handleRota(item) {
       this.id = item.contentId;
+      this.type = item.contentType;
       this.initdata();
     },
     // 点击箭头收缩

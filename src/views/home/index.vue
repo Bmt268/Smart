@@ -8,6 +8,7 @@
     </el-carousel>
     <!-- 活动 -->
     <div class="category">
+      <!-- 六大分类 -->
       <div class="kind">
         <div
           class="kind_item"
@@ -19,9 +20,11 @@
           <span>{{ item.title }}</span>
         </div>
       </div>
+      <!-- 集体活动 -->
       <div class="active" @click="activeDetail">
         <img src="@/assets/image/home/active.png" alt="" />
       </div>
+      <!-- 开始上课 -->
       <div class="classing">
         <img src="@/assets/image/home/@2x.png" alt="" />
       </div>
@@ -73,30 +76,26 @@ export default {
     this.getBannerListFun();
   },
   methods: {
+    // 获取轮播图
     getBannerListFun() {
       getBannerList({ need_first: 1 }).then((res) => {
-        // console.log(res);
         this.bannerlist = res.data;
       });
     },
-    // getNavigateMaterialFun() {
-    //   getNavigateMaterial().then(res => {
-    //     console.log(res);
-    //   });
-    // },
+    // 六大分类跳转点击
     handleKindList(item) {
       this.$router.push({
         path: "/homelist",
         query: { id: item.id },
       });
     },
+    // 集体活动跳转点击
     activeDetail() {
       this.$router.push({
         path: "/teamactive",
       });
     },
   },
-  computed: {},
 };
 </script>
 

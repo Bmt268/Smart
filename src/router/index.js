@@ -65,10 +65,26 @@ const homeRouterMap = [
           import(
             /* webpackChunkName: "materialdetail" */ "../views/home/homelist/MaterialDetail.vue"
           )
+      },
+      {
+        path: "historylist",
+        name: "HistoryList",
+        component: () =>
+          import(
+            /* webpackChunkName: "historylist" */ "../views/home/homelist/HistoryList.vue"
+          )
+      }, {
+        path: "search",
+        name: "Search",
+        component: () =>
+          import(
+            /* webpackChunkName: "search" */ "../views/home/homelist/Search.vue"
+          )
       }
     ]
   }
 ];
+// 园所资源
 const schoolRouterMap = [
   {
     path: "/school",
@@ -100,7 +116,7 @@ const classRouterMap = [
     ]
   }
 ];
-
+// 收藏
 const mycollectRouterMap = [
   {
     path: "/mycollect",
@@ -118,7 +134,7 @@ const mycollectRouterMap = [
     ]
   }
 ];
-
+// 管理
 const managementRouterMap = [
   {
     path: "/management",

@@ -79,3 +79,46 @@ export const newCellectionList = (data, headers) => {
 
 //更换头像
 export const changeHead = data => Request.post("/api_user/headimg", data);
+
+//修改个人信息
+export const updateName = data => Request.post("/api_user/update_info", data);
+
+// 获取素材历史浏览
+export const getRecentRecords = data =>
+  Request.get("/maxwell/v1.0/material/getRecentRecords", data);
+
+// 获取活动详情
+export const getActivityDetail = data =>
+  Request.post("/api_material/activity_detail", data);
+
+//视频详情
+export const getVideoDetail = (data, headers) => {
+  return Request.get("/maxwell/v1.0/material/videoDetail", data, headers);
+};
+
+//游戏详情
+export const getGameDetail = (data, headers) => {
+  return Request.get("/maxwell/v1.0/material/gameDetail", data, headers);
+};
+// 删除素材历史浏览
+export const deleteMaterialRecord = params =>
+  Request.post(`/maxwell/v1.0/material/deleteRecordById?id=${params.id}`);
+
+//全局搜索分类词
+export const getGlobalTag = data =>
+  Request.post("/api_category/get_global_tag", data);
+
+// 搜索素材
+export const searchMaterial = data =>
+  Request.post("/maxwell/v1.0/search/keyword", data);
+
+// 获取招生手册 编辑还是创建状态
+export const getEnrollmentStatus = data =>
+  Request.get("/maxwell/v1.0/school/enrollment/status", data);
+
+//获取班级列表
+export const getClassList = data => Request.post("/api_room/lst", data);
+
+//删除班级
+export const delClass = data => Request.post("/api_room/del", data);
+

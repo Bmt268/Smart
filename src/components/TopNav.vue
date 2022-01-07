@@ -4,15 +4,25 @@
       <!-- 搜索框 -->
       <div class="search_wrap">
         <input
+          @keyup.enter="handleSearch"
           v-model="input"
           placeholder="搜索“幼升小、特色课等”"
           class="search"
         />
-        <img src="@/assets/image/icon/search2x.png" alt="" />
+        <img
+          src="@/assets/image/icon/search2x.png"
+          alt=""
+          @click="handleSearch"
+        />
       </div>
 
       <!-- 班级选择 -->
-      <el-select v-model="value" placeholder="请选择" class="class_name">
+      <el-select
+        v-model="value"
+        placeholder="请选择"
+        class="class_name"
+        @change="chooseClass"
+      >
         <el-option
           v-for="item in options"
           :key="item.value"
@@ -23,7 +33,7 @@
       </el-select>
 
       <!-- 历史 -->
-      <div class="history">
+      <div class="history" @click="handleHistory">
         <i class="el-icon-time"></i>
         <div>历史</div>
       </div>
@@ -47,7 +57,8 @@
                 class="avatar-uploader"
                 action=""
                 :show-file-list="false"
-                :on-success="handleAvatarSuccess"
+                :auto-upload="false"
+                :on-change="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
               >
                 <img v-if="imageUrl" :src="imageUrl" class="avatar" />
@@ -66,16 +77,22 @@
         <div class="user_info">
           <div class="iname">
             <div class="fullname">姓名 :</div>
-            <div class="aname" @click="show = !show" v-if="show">
+            <div class="aname" v-if="show">
               {{ username.name }}
             </div>
-            <input type="text" v-else />
+            <input
+              type="text"
+              v-else
+              v-model="inpt_name"
+              :placeholder="username.name"
+              @keyup.enter="handleSave"
+            />
             <div
               class="el-icon-edit-outline"
               @click="show = !show"
               v-if="show"
             ></div>
-            <div class="save" @click="show = !show" v-else>保存</div>
+            <div class="save" @click="handleSave" v-else>保存</div>
           </div>
           <div class="ititle">
             <div class="protitle">职称 :</div>
@@ -85,7 +102,9 @@
           </div>
           <div class="iclass">
             <div class="res_class">负责班级 :</div>
-            <div class="real_class">{{ username.room[0] }}</div>
+            <div class="real_class" v-if="username.room">
+              {{ username.room[0] }}
+            </div>
           </div>
           <div class="iphone">
             <div class="phone">联系方式 :</div>
@@ -115,7 +134,7 @@
 </template>
 
 <script>
-import { getClasses, getUserInfo, changeHead } from "@/api/home";
+import { getClasses, getUserInfo, changeHead, updateName } from "@/api/home";
 
 export default {
   data() {
@@ -127,24 +146,37 @@ export default {
       imageUrl: "",
       hidden: true,
       show: true,
+      inpt_name: "",
+      client: "",
     };
   },
   methods: {
     getClassesFun() {
       getClasses().then((res) => {
-        // console.log(res);
+        console.log(res);
         this.options = res.data;
+        this.value = localStorage.getItem("roomid") || res.data[0].room_id;
       });
     },
     getUserInfoFun() {
       getUserInfo().then((res) => {
-        // console.log(res);
+        console.log(res);
         this.username = res.data;
+        this.client = res.data.client;
+        localStorage.setItem("client", this.client);
       });
     },
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+    handleAvatarSuccess(res) {
+      // this.imageUrl = URL.createObjectURL(file.raw);
       console.log(res);
+      this.getBase64(res.raw).then((res) => {
+        // console.log(res);
+        this.username.headimg = res;
+        let params = {
+          headimg: res,
+        };
+        this.changeHeadFun(params);
+      });
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === "image/jpeg";
@@ -175,24 +207,65 @@ export default {
       });
     },
     handleExit() {
-      localStorage.clear();
-      this.$router.push({ path: "/user/login" });
+      this.$confirm("此操作将退出当前登录, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(() => {
+        localStorage.clear();
+        this.$router.push({ path: "/user/login" });
+      });
     },
     handleClose() {
       this.hidden = !this.hidden;
     },
+    // 搜索跳转
+    handleSearch() {
+      if (this.$route.name == "Search") {
+        console.log("当前是搜索");
+        this.$bus.$emit("searchInput", this.input);
+        return;
+      }
+      this.$router.push({
+        path: "search",
+        query: {
+          keyword: this.input,
+        },
+      });
+    },
     // 切换头像
-    changeHeadFun() {
-      changeHead().then((res) => {
+    changeHeadFun(params) {
+      changeHead(params).then((res) => {
         console.log(res);
       });
+    },
+    //修改个人信息
+    updateNameFun() {
+      updateName({ name: this.inpt_name }).then((res) => {
+        console.log(res);
+
+        this.getUserInfoFun();
+      });
+    },
+    // 保存名字
+    handleSave() {
+      this.show = !this.show;
+      this.updateNameFun();
+    },
+    // 历史记录
+    handleHistory() {
+      this.$router.push({ path: "historylist" });
+    },
+    // 选择班级
+    chooseClass(res) {
+      console.log(res);
+      localStorage.setItem("roomid", res);
     },
   },
 
   mounted() {
     this.getClassesFun();
     this.getUserInfoFun();
-    this.changeHeadFun();
   },
 };
 </script>
@@ -244,6 +317,7 @@ export default {
   right: 30px;
   width: 16px;
   height: 16px;
+  cursor: pointer;
 }
 .search {
   width: 320px;
@@ -352,7 +426,6 @@ input::placeholder {
         margin-left: 37px;
         font-size: 14px;
         color: #0d0b22;
-        cursor: pointer;
       }
       .el-icon-edit-outline {
         margin-left: 13px;

@@ -2,13 +2,18 @@
   <div class="material_wrap" @click="handleRead">
     <img :src="citem.coverImageUrl" alt="" />
     <h2>{{ citem.title }}</h2>
-    <h3>绘本包</h3>
+    <h3>{{ type[citem.contentType] }}</h3>
     <div class="intr">{{ citem.intro }}</div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      type: ["活动", "图片", "绘本", "音乐", "", "", "", "", "游戏", "视频"],
+    };
+  },
   props: {
     citem: {
       type: Object,

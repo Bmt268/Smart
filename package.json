@@ -13,6 +13,7 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.15.6",
     "lib-flexible": "^0.3.2",
+    "moment": "^2.29.1",
     "postcss-px2rem": "^0.3.0",
     "print-js": "^1.6.0",
     "save": "^2.4.0",

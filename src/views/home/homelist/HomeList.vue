@@ -43,29 +43,33 @@ export default {
   components: {
     Material,
   },
+  mounted() {
+    this.id = this.$route.query.id;
+    this.getCategoryMaterialFun();
+  },
   methods: {
-    handlenav(abc, item) {
-      this.navindex = abc;
+    // 点击选项 出现对应的内容
+    handlenav(index, item) {
+      this.navindex = index;
       this.category_id = item.id;
       this.getMaterialSpecialFun();
     },
+    // 点击跳转
     chandleRead(citem) {
       this.$router.push({
         path: "/read",
         query: { special_id: citem.special_id },
       });
-      // console.log(citem);
     },
     // 选项卡
     getCategoryMaterialFun() {
       getCategoryMaterial({ navigate_id: this.id }).then((res) => {
-        // console.log(res);
         this.choice = res.data;
         this.category_id = res.data[0].id;
         this.getMaterialSpecialFun();
       });
     },
-    // 选项下面内容
+    // 选项对应的内容
     getMaterialSpecialFun() {
       let params = {
         offset: this.offset,
@@ -78,10 +82,6 @@ export default {
         this.material_content = res.data.pack_list;
       });
     },
-  },
-  mounted() {
-    this.id = this.$route.query.id;
-    this.getCategoryMaterialFun();
   },
 };
 </script>
