@@ -2,7 +2,7 @@
   <div id="ku">
     <div class="aside" v-if="!hiddenlist.includes($route.name)">
       <div class="avatar">
-        <img src="" alt="" />
+        <img :src="selfinfo.round_logo_url" alt="" />
       </div>
       <nav>
         <router-link to="/home">
@@ -69,7 +69,7 @@
       </nav>
     </div>
     <div class="content">
-      <top-nav v-if="!hiddenlist.includes($route.name)"></top-nav>
+      <top-nav v-if="!$route.meta.show"></top-nav>
       <router-view></router-view>
     </div>
   </div>
@@ -77,17 +77,31 @@
 
 <script>
 import TopNav from "@/components/TopNav";
+import { getSelf } from "@/api/home.js";
+
 export default {
   data() {
     return {
       hiddenlist: ["HistoryList"],
+      selfinfo: "",
     };
   },
   components: {
     TopNav,
   },
   mounted() {
-    console.log(this.$route);
+    this.$bus.$on("saveLogo", () => {
+      this.getSelfFun();
+    });
+    this.getSelfFun();
+  },
+  methods: {
+    getSelfFun() {
+      getSelf().then((res) => {
+        console.log(res);
+        this.selfinfo = res.data;
+      });
+    },
   },
 };
 </script>
@@ -106,10 +120,12 @@ export default {
     .avatar {
       width: 36px;
       height: 36px;
-      margin: 0.16rem 0;
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: red;
+      margin: 16px 0;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
     }
     nav {
       font-size: 12px;

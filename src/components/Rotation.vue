@@ -85,7 +85,6 @@ export default {
   },
   mounted() {
     this.rotaList = JSON.parse(localStorage.getItem("readList"));
-    console.log(this.rotaList);
 
     this.classindex = this.rotaList.findIndex((res) => {
       // console.log(res);
@@ -192,8 +191,12 @@ export default {
           object-fit: cover;
         }
         .rota_title {
+          width: 100%;
           margin-top: 16px;
           font-size: 16px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
       .active {

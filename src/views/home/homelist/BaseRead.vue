@@ -51,6 +51,8 @@
               v-for="(item1, index) in item.class"
               :key="index"
               :citem="item1"
+              :bitem="item.class"
+              @handleRead="handleRead"
             ></material>
           </div>
         </el-collapse-item>
@@ -92,7 +94,7 @@ export default {
     },
     getSerialsDetailFun() {
       getSerialsDetail({ project: this.id }).then((res) => {
-        // console.log(res);
+        console.log(res);
         this.topwrap = res.data;
       });
     },
@@ -113,6 +115,18 @@ export default {
     },
     handleChange(val) {
       console.log(val);
+    },
+    // 点击跳转详情
+    handleRead(item1, item2) {
+      localStorage.setItem("readList", JSON.stringify(item2));
+      this.$router.push({
+        path: "/materialdetail",
+        query: {
+          id: item1.contentId,
+          type: item1.contentType,
+          specialId: this.id,
+        },
+      });
     },
   },
 };

@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       phone: "",
-      vcode: ""
+      vcode: "",
     };
   },
   methods: {
@@ -37,34 +37,24 @@ export default {
     login() {
       getLoginInfo({
         phone: this.phone,
-        vcode: this.vcode
-      }).then(res => {
+        vcode: this.vcode,
+      }).then((res) => {
         if (res.errcode == 50001) {
           this.$message.error("验证码错误");
-          return;
-        }
-        if (res.data.eid) {
-          this.$router.push({
-            path: "/user/register",
-            query: {
-              phone: this.phone
-            }
-          });
-          return;
         } else {
           localStorage.setItem("uid", res.data.uid);
           localStorage.setItem("role", res.data.role);
           window.localStorage.wmUserInfo = JSON.stringify({
             userId: res.data.eid,
             userTag: "tag",
-            projectVersion: "1.0.1"
+            projectVersion: "1.0.1",
           });
           this.$router.push("/home");
         }
       });
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>

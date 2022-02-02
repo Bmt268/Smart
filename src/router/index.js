@@ -69,6 +69,9 @@ const homeRouterMap = [
       {
         path: "historylist",
         name: "HistoryList",
+        meta: {
+          show: true
+        },
         component: () =>
           import(
             /* webpackChunkName: "historylist" */ "../views/home/homelist/HistoryList.vue"
@@ -79,6 +82,13 @@ const homeRouterMap = [
         component: () =>
           import(
             /* webpackChunkName: "search" */ "../views/home/homelist/Search.vue"
+          )
+      }, {
+        path: "startclass",
+        name: "Startclass",
+        component: () =>
+          import(
+            /* webpackChunkName: "startclass" */ "../views/home/homelist/Startclass.vue"
           )
       }
     ]

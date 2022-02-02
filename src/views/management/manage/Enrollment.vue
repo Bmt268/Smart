@@ -54,7 +54,6 @@ export default {
   methods: {
     getEnrollmentStatusFun() {
       getEnrollmentStatus({ client: this.client }).then((res) => {
-        console.log(res);
         this.management = res.data;
       });
     },

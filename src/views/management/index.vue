@@ -34,12 +34,8 @@ export default {
           tabcom: () => import("@/views/management/manage/Enrollment"),
         },
         {
-          name: "园所官网",
-          tabcom: () => import("@/views/management/manage/Officialwebsite"),
-        },
-        {
-          name: "信息收集",
-          tabcom: () => import("@/views/management/manage/Infomation"),
+          name: "课堂笔记",
+          tabcom: () => import("@/views/management/manage/Notebook"),
         },
         {
           name: "教师管理",

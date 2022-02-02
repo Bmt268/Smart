@@ -112,6 +112,41 @@ export const getGlobalTag = data =>
 export const searchMaterial = data =>
   Request.post("/maxwell/v1.0/search/keyword", data);
 
+// 单素材排课环节获取
+export const getmaterialcheduling = (data, headers) =>
+  Request.get(
+    "/maxwell/v1.0/schedule/v4/process",
+    data,
+    headers
+  );
+
+// 获取环节信息列表
+export const getProcess = (data, headers) =>
+  Request.get(
+    "/maxwell/v1.0/takeclass/process",
+    data,
+    headers
+  );
+
+// 获取环节下的排课信息
+export const getProcessClass = (data, headers) =>
+  Request.get(
+    "/maxwell/v1.0/takeclass/process/lesson",
+    data,
+    headers
+  );
+
+// 课表内排课 库内资源/园所资源新接口 区分是否有目标的填写
+export const setMaterialsDefaultTarget = (data, headers) =>
+  Request.post(
+    "/maxwell/v1.0/schedule/garden/defination/defaultTarget",
+    data,
+    headers
+  );
+
+// 管理
+
+
 // 获取招生手册 编辑还是创建状态
 export const getEnrollmentStatus = data =>
   Request.get("/maxwell/v1.0/school/enrollment/status", data);
@@ -121,4 +156,67 @@ export const getClassList = data => Request.post("/api_room/lst", data);
 
 //删除班级
 export const delClass = data => Request.post("/api_room/del", data);
+
+//编辑班级
+export const editClass = data => Request.put("/maxwell/v1.0/room", data);
+
+//添加班级
+export const addClass = data => Request.post("/maxwell/v1.0/room", data);
+
+//获取我的班级列表
+export const getMyClassList = data =>
+  Request.get("/maxwell/v1.0/schedule/user/rooms", data);
+
+//查询学生信息
+export const getStudent = data => Request.post("api_student/lst", data);
+
+//离园
+export const quitStudent = data => Request.post("api_student/quit", data);
+
+//获取班级邀请学生二维码
+export const getInvitStuQR = (data, headers) => {
+  return Request.get("/maxwell/v1.0/room/invite/code", data, headers);
+};
+
+//获取教师列表
+export const getTeacherList = data => Request.post("/api_user/lst_share", data);
+
+//编辑老师
+export const editTeacher = data => Request.post("/api_user/set_share", data);
+
+//删除老师
+export const delTeacher = data => Request.post("/api_user/del_share", data);
+
+//园长首页
+export const getSaasCount = data =>
+  Request.post("/api_room/get_saas_count", data);
+
+// 查询课堂笔记
+export const getClassRoomRecords = (data) =>
+  Request.get("/maxwell/v1.0/inspire/v3/classnotes", data);
+// 删除课堂笔记
+export const deleteRecordApi = (data) =>
+  Request.put("/maxwell/v1.0/inspire/v3/blackboard", data);
+
+// 基本设置
+export const getSelf = data => Request.post("/api_saas/self", data);
+
+// 基本设置保存
+export const setCfg = data => Request.post("/api_saas/cfg", data);
+
+
+
+// AI课表
+
+// 按照日期查课表
+export const getScheduleList = data =>
+  Request.get("/maxwell/v1.0/schedule/new", data);
+
+//课表获取年月周接口
+export const getWeekOfMonth = (data, headers) => {
+  return Request.get("/maxwell/v1.0/schedule/weekOfMonth", data, headers);
+};
+
+
+
 

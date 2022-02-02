@@ -2,15 +2,20 @@
   <div class="catenav">
     <h1>{{ cated.title }}</h1>
     <div class="cate">{{ cated.contentRoute }}</div>
-    <div class="arrange">排课</div>
+    <div class="arrange" @click="handleSchedule">排课</div>
   </div>
 </template>
-
+ 
 <script>
 export default {
   props: {
     cated: {
       type: Object,
+    },
+  },
+  methods: {
+    handleSchedule() {
+      this.$emit("scheduleclick");
     },
   },
 };
@@ -45,6 +50,7 @@ export default {
     position: absolute;
     right: 56px;
     bottom: 38px;
+    cursor: pointer;
   }
 }
 </style>

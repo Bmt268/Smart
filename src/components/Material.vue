@@ -1,6 +1,6 @@
 <template>
   <div class="material_wrap" @click="handleRead">
-    <img :src="citem.coverImageUrl" alt="" />
+    <img v-lazy="citem.coverImageUrl" alt="" />
     <h2>{{ citem.title }}</h2>
     <h3>{{ type[citem.contentType] }}</h3>
     <div class="intr">{{ citem.intro }}</div>
@@ -18,10 +18,13 @@ export default {
     citem: {
       type: Object,
     },
+    bitem: {
+      type: Array,
+    },
   },
   methods: {
     handleRead() {
-      this.$emit("handleRead", this.citem);
+      this.$emit("handleRead", this.citem, this.bitem);
     },
   },
 };

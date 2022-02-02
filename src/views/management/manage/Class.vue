@@ -2,7 +2,7 @@
   <div class="class">
     <div class="class_top">
       <div class="title">2019春季</div>
-      <div class="build">
+      <div class="build" @click="handleAdd">
         <div class="el-icon-plus"></div>
         创建班级
       </div>
@@ -21,50 +21,74 @@
         <el-table-column prop="class_id" label="班级ID"> </el-table-column>
         <el-table-column label="创建日期">
           <template slot-scope="scope">
-            <span>{{ scope.row.addts | datefmt() }}</span>
+            <span>{{ scope.row.addts | datefmt("YYYY-MM-DD") }}</span>
           </template>
         </el-table-column>
         <el-table-column prop="teacher_num" label="教师人数"> </el-table-column>
         <el-table-column prop="student_num" label="学生人数"> </el-table-column>
         <el-table-column prop="rate" label="男女比例"> </el-table-column>
-        <el-table-column prop="operation" label="操作">
+        <el-table-column label="操作">
           <template slot-scope="scope">
             <el-dropdown trigger="click">
               <span class="el-dropdown-link">
                 <i class="el-icon-more"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item
-                  icon="el-icon-plus"
-                  @click.native.prevent="handleclick(scope)"
+                <el-dropdown-item @click.native.prevent="handleclick(scope)"
                   >删除</el-dropdown-item
                 >
+                <el-dropdown-item @click.native.prevent="handleEdit(scope)"
+                  >编辑</el-dropdown-item
+                >
+                <!-- <el-button type="text" @click="dialogVisible = true"
+                  >编辑</el-button
+                > -->
+                <!-- <el-dropdown-item @click.native.prevent="handleclick(scope)"
+                  >编辑</el-dropdown-item
+                > -->
               </el-dropdown-menu>
             </el-dropdown>
           </template>
         </el-table-column>
       </el-table>
     </div>
-
-    <!-- <div class="class_options">
-      <div class="option_name">编号</div>
-      <div class="option_name">年级</div>
-      <div class="option_name">班级</div>
-      <div class="option_name">编号</div>
-    </div>
-    <div class="class_content">
-      <div class="class_result">
-        <div class="result">1</div>
-        <div class="result">小</div>
-        <div class="result">小一班</div>
-        <div class="result">1</div>
+    <!-- 编辑弹窗 -->
+    <el-dialog
+      :title="edittitle"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <div class="edit_title">
+        <span>名称:</span>
+        <input type="text" v-model="input_title" />
       </div>
-    </div> -->
+      <div class="edit_content">
+        <div class="etitle">年级:</div>
+        <div class="edit_options">
+          <el-radio-group v-model="radio">
+            <el-radio :label="1">托班</el-radio>
+            <el-radio :label="2">小班</el-radio>
+            <el-radio :label="3">中班</el-radio>
+            <el-radio :label="4">大班</el-radio>
+            <el-radio :label="5">大大班</el-radio>
+          </el-radio-group>
+        </div>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false" class="cancel"
+          >取 消</el-button
+        >
+        <el-button type="primary" @click="handleSuccess" class="sure"
+          >确 定</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getClassList, delClass } from "@/api/home.js";
+import { getClassList, delClass, editClass, addClass } from "@/api/home.js";
 export default {
   data() {
     return {
@@ -76,12 +100,12 @@ export default {
         color: "#0D0B22",
         textAlign: "center",
       },
+      dialogVisible: false,
+      radio: "",
+      edittitle: "",
+      input_title: "",
+      roomid: "",
     };
-  },
-  filters: {
-    datefmt(value) {
-      return this.$moment(value).format("YYYY-MM-DD");
-    },
   },
   mounted() {
     this.getClassListFun();
@@ -89,14 +113,12 @@ export default {
   methods: {
     getClassListFun() {
       getClassList().then((res) => {
-        console.log(res);
         this.tableData = res.data.result;
       });
     },
+    // 点击删除
     handleclick(scope) {
-      console.log(scope);
       delClass({ room_id: scope.row.room_id }).then((res) => {
-        console.log(res);
         if (res.errcode != 0) {
           this.$message("班级存在学生，无法删除");
         } else {
@@ -104,6 +126,58 @@ export default {
           this.getClassListFun();
         }
       });
+    },
+    // 编辑
+    handleEdit(scope) {
+      this.dialogVisible = true;
+      this.edittitle = "编辑班级";
+      this.roomid = scope.row.room_id;
+      this.input_title = scope.row.name;
+      this.radio = parseInt(scope.row.grade);
+    },
+    // 关闭
+    handleClose() {
+      this.dialogVisible = false;
+    },
+    // 创建班级
+    handleAdd() {
+      this.dialogVisible = true;
+      this.edittitle = "创建班级";
+      this.input_title = "";
+    },
+    // 弹窗确定按钮
+    handleSuccess() {
+      if (this.input_title == "" || this.radio == "") {
+        this.$message({
+          type: "warning",
+          message: "请填写准确的班级信息",
+        });
+        return;
+      }
+      if (this.edittitle == "创建班级") {
+        let params = {
+          grade: this.radio,
+          name: this.input_title,
+        };
+        addClass(params).then((res) => {
+          if (res.code == 200) {
+            this.dialogVisible = false;
+            this.getClassListFun();
+          }
+        });
+      } else {
+        let params = {
+          grade: this.radio,
+          name: this.input_title,
+          roomId: this.roomid,
+        };
+        editClass(params).then((res) => {
+          if (res.code == 200) {
+            this.dialogVisible = false;
+            this.getClassListFun();
+          }
+        });
+      }
     },
   },
 };
@@ -148,6 +222,87 @@ export default {
     }
     .el-icon-more {
       cursor: pointer;
+      color: #e5423e;
+    }
+    .el-dropdown-menu {
+      text-align: center;
+    }
+    .el-button--text {
+      color: #797471;
+      text-align: center;
+    }
+  }
+  // 弹窗
+  .el-dialog__title {
+    font-size: 20px;
+    color: rgba(89, 95, 124);
+    font-weight: 600;
+  }
+  .edit_title {
+    span {
+      display: inline-block;
+      font-size: 18px;
+      width: 100px;
+    }
+    input {
+      background-color: #f5f5fb;
+      border-radius: 20px;
+      height: 40px;
+      font-size: 18px;
+      padding-left: 10px;
+    }
+  }
+  .edit_content {
+    display: flex;
+    margin-top: 25px;
+    align-content: center;
+    .etitle {
+      font-size: 18px;
+      width: 100px;
+    }
+    .edit_options {
+      // margin-left: 40px;
+      display: flex;
+      font-size: 18px;
+      .el-radio__inner {
+        width: 20px;
+        height: 20px;
+      }
+      .el-radio {
+        margin-bottom: 10px;
+      }
+      .is-checked {
+        .el-radio__inner {
+          background: url(~@/assets/image/bingo.png) no-repeat;
+          border: none;
+
+          background-size: cover;
+        }
+        .el-radio__label {
+          color: #6e6d7a;
+          font-weight: 700;
+        }
+        .el-radio__inner::after {
+          content: "";
+          display: none;
+        }
+      }
+    }
+  }
+  .dialog-footer {
+    .cancel {
+      border-radius: 20px;
+      color: #6e6d7a;
+      background: #f7f7f9;
+      border: none;
+      font-weight: 800;
+    }
+    .sure {
+      border-radius: 20px;
+      background-color: #e5423e;
+      color: #fff;
+      border: none;
+      font-weight: 800;
     }
   }
 }

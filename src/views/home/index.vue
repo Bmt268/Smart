@@ -25,7 +25,7 @@
         <img src="@/assets/image/home/active.png" alt="" />
       </div>
       <!-- 开始上课 -->
-      <div class="classing">
+      <div class="classing" @click="handleStartclass">
         <img src="@/assets/image/home/@2x.png" alt="" />
       </div>
     </div>
@@ -93,6 +93,12 @@ export default {
     activeDetail() {
       this.$router.push({
         path: "/teamactive",
+      });
+    },
+    // 开始上课
+    handleStartclass() {
+      this.$router.push({
+        path: "/startclass",
       });
     },
   },
