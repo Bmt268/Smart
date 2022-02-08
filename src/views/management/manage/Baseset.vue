@@ -97,12 +97,12 @@
             <div class="rotation_name">轮播图2</div>
           </div> -->
           <el-upload
-            action=""
+            action="#"
+            :http-request="httpRequest"
             list-type="picture-card"
             :on-preview="handlePictureCardPreview"
             :on-remove="handleRemove"
             :file-list="filelist"
-            :on-change="handleBannerSuccess"
           >
             <i class="el-icon-plus"></i>
           </el-upload>
@@ -144,6 +144,7 @@ export default {
       selfinfo: "",
       dialogImageUrl: "",
       dialogVisible: false,
+      bannerurl: [],
     };
   },
   mounted() {
@@ -184,10 +185,13 @@ export default {
     },
     //  提交
     handleSave() {
+      let arr = this.selfinfo.banner_url.map((item) => {
+        return item.md5;
+      });
       let params = {
         ad_image: this.selfinfo.ad_image_url,
         ad_video: this.selfinfo.ad_video_url,
-        banner: [],
+        banner: [...this.bannerurl, ...arr],
         brand: this.selfinfo.brand,
         logo: this.selfinfo.logo,
         name: this.selfinfo.name,
@@ -216,18 +220,16 @@ export default {
       });
     },
     handleAvatarSuccess(res) {
-      // this.imageUrl = URL.createObjectURL(file.raw);
       console.log(res);
       this.getBase64(res.raw).then((res) => {
-        // console.log(res);
         this.selfinfo.round_logo_url = res;
       });
     },
-    handleBannerSuccess(file, fileList) {
-      // this.imageUrl = URL.createObjectURL(file.raw);
-
-      this.selfinfo.banner_url.push(file);
-      console.log(fileList);
+    httpRequest(res) {
+      console.log(res);
+      this.getBase64(res.file).then((res) => {
+        this.bannerurl.push(res);
+      });
     },
   },
 };

@@ -218,5 +218,31 @@ export const getWeekOfMonth = (data, headers) => {
 };
 
 
+// 园所资源
 
+export const getCateGoryRoot = (data) => Request.get("/maxwell/v1.0/course/category/root", data);
 
+// 资源详情
+export const getCateGoryChildren = (data) => Request.get("/maxwell/v1.0/course/category/children", data);
+
+// 素材详情
+export const getCateGoryCourseware = (data) => Request.get("/maxwell/v1.0/courseware", data);
+
+// 新建主题
+export const setCourseCategory = (data) => Request.post("/maxwell/v1.0/course/category", data);
+
+// 手机查看 参数id(素材id)
+export const getCourseQrcide = (data) => Request.post("/maxwell/v1.0/courseware/qrcode", data);
+
+// 删除素材（参数素材id）
+export const deleteCourseware = (data) => Request.delete(`/maxwell/v1.0/courseware/${data}`);
+
+// 获取文件树
+export const getCateGoryTree = (data) => Request.get(`/maxwell/v1.0/course/category/tree`, data);
+
+// 复制素材
+export const copyCourseware = (data) => Request.post(`/maxwell/v1.0/courseware/copy`, data);
+
+// 获取oss Token
+export const getOSStoken = (data, headers) =>
+  Request.get("/maxwell/v1.0/oss/token", data, headers);

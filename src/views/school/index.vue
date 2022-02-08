@@ -2,128 +2,137 @@
   <div class="sch">
     <!-- 顶部 -->
     <div class="top">
-      <span>园所资源 > 园所公共课件 > 春天</span>
       <div class="uploading">
-        <div class="source">上传资源</div>
-        <div class="up_right">
-          <div class="theme">新建主题</div>
-          <div class="up">上传</div>
+        <div
+          class="source"
+          v-for="(item, index) in soureList"
+          :key="index"
+          :class="{ active: isactive == index }"
+          @click="handleClick(index)"
+        >
+          {{ item }}
         </div>
-      </div>
-      <div class="tab_btm">
-        <img src="@/assets/image/tab_btm.png" alt="" />
       </div>
     </div>
     <!-- 内容 -->
     <div class="content">
-      <div class="content_item">
-        <img src="" alt="" />
-        <span>附件</span>
-      </div>
-      <div class="content_item">
-        <img src="" alt="" />
-        <span>附件</span>
-      </div>
-
-      <div class="content_item">
-        <img src="" alt="" />
-        <span>附件</span>
-      </div>
-      <div class="content_item">
-        <img src="" alt="" />
-        <span>附件</span>
-      </div>
-      <div class="content_item">
-        <img src="" alt="" />
-        <span>附件</span>
-      </div>
-      <div class="content_item">
-        <img src="" alt="" />
-        <span>附件</span>
-      </div>
-      <div class="content_item">
-        <img src="" alt="" />
-        <span>附件</span>
-      </div>
-      <div class="content_item">
-        <img src="" alt="" />
-        <span>附件</span>
+      <div
+        class="content_item"
+        v-for="item in accessories"
+        :key="item.id"
+        @click="handleDetail(item)"
+      >
+        <img :src="item.type == 0 ? publicimg : classimg" alt="" />
+        <div class="item_titles">{{ item.title }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { getCateGoryRoot } from "@/api/home.js";
+export default {
+  data() {
+    return {
+      isactive: 0,
+      soureList: ["上传资源", "已购素材"],
+      accessories: [],
+      publicimg: require("@/assets/image/publicFolder.png"),
+      classimg: require("@/assets/image/classSource.png"),
+    };
+  },
+  mounted() {
+    this.getCateGoryRootFun();
+  },
+  methods: {
+    handleClick(index) {
+      this.isactive = index;
+    },
+    getCateGoryRootFun() {
+      getCateGoryRoot({ from: 1 }).then((res) => {
+        console.log(res);
+        this.accessories = res.data;
+      });
+    },
+    handleDetail(item) {
+      this.$router.push({
+        path: "/school/public",
+        query: {
+          id: item.id,
+          type: item.type,
+          title: item.title,
+        },
+      });
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
 .sch {
-  padding: 32px;
-}
-.top {
-  span {
-    font-size: 14px;
-  }
-  .uploading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .source {
-      font-size: 18px;
-      color: #e5423e;
-    }
-    .up_right {
+  .top {
+    .uploading {
       display: flex;
-      justify-content: center;
-      .theme {
-        width: 120px;
-        height: 44px;
-        box-shadow: 0px 4px 12px 0px rgba(28, 25, 24, 0.04);
-        border-radius: 4px;
-        border: 1px solid #bfbfbf;
+      align-items: center;
+      height: 89px;
+      padding: 32px;
+      .source {
         font-size: 18px;
-        line-height: 44px;
-        text-align: center;
+        color: #6e6d7a;
+        font-weight: bold;
+        cursor: pointer;
+        margin-right: 60px;
       }
-      .up {
-        margin-left: 40px;
-        width: 120px;
-        height: 44px;
-        background: #e5423e;
-        box-shadow: 0px 4px 12px 0px rgba(28, 25, 24, 0.04);
-        border-radius: 4px;
-        font-size: 18px;
-        color: #fff;
-        line-height: 44px;
-        text-align: center;
+      .active {
+        color: #e5423e;
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -33px;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background-color: #e5423e;
+          border-radius: 10px;
+        }
       }
     }
   }
-  .tab_btm {
-    img {
-      width: 84px;
-      height: 12px;
-      margin-left: 33px;
-      margin-top: 28px;
-    }
-  }
-}
-.content {
-  background-color: #f5f5fb;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  .content_item {
-    width: 414px;
-    height: 320px;
-    background: #ffffff;
-    border-radius: 4px;
-    text-align: center;
-    line-height: 320px;
-    margin: 24px;
-    span {
-      font-size: 18px;
+  .content {
+    background-color: #f5f5fb;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding-left: 32px;
+    height: calc(100vh - 89px - 66px);
+    .content_item {
+      width: 414px;
+      height: 320px;
+      background: #ffffff;
+      border-radius: 4px;
+      text-align: center;
+      margin-right: 28px;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: 0.3s;
+      .item_titles {
+        font-size: 18px;
+        color: #0d0b22;
+      }
+      img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-top: 89px;
+        margin-bottom: 53px;
+      }
+      &:hover {
+        box-shadow: 0px 4px 12px 0px rgba(28, 25, 24, 0.1);
+        transform: translateY(-6px);
+      }
     }
   }
 }

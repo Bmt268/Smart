@@ -106,7 +106,13 @@ const schoolRouterMap = [
         name: "sourceUploadFirst",
         component: () =>
           import(/* webpackChunkName: "school" */ "../views/school/index.vue")
-      }
+      },
+      {
+        path: "public",
+        name: "Public",
+        component: () =>
+          import(/* webpackChunkName: "public" */ "../views/school/schoollist/Public.vue")
+      },
     ]
   }
 ];

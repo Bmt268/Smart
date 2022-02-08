@@ -153,14 +153,12 @@ export default {
   methods: {
     getClassesFun() {
       getClasses().then((res) => {
-        console.log(res);
         this.options = res.data;
         this.value = localStorage.getItem("roomid") || res.data[0].room_id;
       });
     },
     getUserInfoFun() {
       getUserInfo().then((res) => {
-        console.log(res);
         this.username = res.data;
         this.client = res.data.client;
         localStorage.setItem("client", this.client);
@@ -235,15 +233,11 @@ export default {
     },
     // 切换头像
     changeHeadFun(params) {
-      changeHead(params).then((res) => {
-        console.log(res);
-      });
+      changeHead(params).then(() => {});
     },
     //修改个人信息
     updateNameFun() {
-      updateName({ name: this.inpt_name }).then((res) => {
-        console.log(res);
-
+      updateName({ name: this.inpt_name }).then(() => {
         this.getUserInfoFun();
       });
     },
