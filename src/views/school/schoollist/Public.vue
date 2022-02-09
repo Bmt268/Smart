@@ -83,6 +83,7 @@
         v-if="course"
         :courselist="courselist"
         @clickClose="clickClose"
+        :parentId="parentId"
       ></upload>
     </div>
   </div>
@@ -203,7 +204,10 @@ export default {
     },
     httpRequest(res) {
       this.courselist.push(res.file);
-      console.log(this.courselist);
+      this.courselist.forEach((item) => {
+        item.intro = "";
+        item.label = "";
+      });
       this.course = true;
     },
   },

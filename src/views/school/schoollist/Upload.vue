@@ -25,11 +25,14 @@
           </div>
           <div class="file_label">
             <div class="course_name">课件标签:</div>
-            <input type="text" />
+            <input type="text" v-model="item.label" />
           </div>
           <div class="file_brief">
             <div class="course_name">课件简介:</div>
-            <textarea placeholder="请输入该课件简介~"></textarea>
+            <textarea
+              placeholder="请输入该课件简介~"
+              v-model="item.intro"
+            ></textarea>
           </div>
         </div>
       </div>
@@ -43,6 +46,7 @@
 
 <script>
 import uploadSource from "@/common/alioss.js";
+import { batchUploadSource } from "@/api/home.js";
 export default {
   data() {
     return {};
@@ -51,13 +55,53 @@ export default {
     courselist: {
       type: Array,
     },
+    parentId: {
+      type: [String, Number],
+    },
   },
   methods: {
     handleClose() {
       this.$emit("clickClose");
     },
+    getType(name) {
+      let typelist = [
+        { name: "image/jpeg", type: 4 },
+        { name: "mp4", type: 3 },
+        { name: "image/png", type: 4 },
+      ];
+      let obj = typelist.filter((item) => {
+        return item.name == name;
+      });
+      console.log(obj);
+      return obj[0].type;
+    },
     handleImport() {
-      uploadSource();
+      console.log(this.courselist);
+      let filelist = this.courselist.map((item) => {
+        return {
+          fileName: item.name.split(".")[0],
+          fileSize: item.size,
+          intro: item.intro,
+          label: item.label,
+          name: item.name,
+          overrun: false,
+          type: this.getType(item.type),
+          uploadStatu: item.status,
+        };
+      });
+      uploadSource(this.courselist).then((res) => {
+        console.log(res);
+        // filelist.forEach((item, index) => {
+        //   item.fileUrl = res[index].res.requestUrls[0];
+        // });
+        console.log(filelist);
+      });
+    },
+    batchUploadSourceFun() {
+      batchUploadSource({
+        categoryId: this.parentId,
+        FileList: [],
+      }).then(() => {});
     },
   },
 };

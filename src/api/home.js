@@ -246,3 +246,7 @@ export const copyCourseware = (data) => Request.post(`/maxwell/v1.0/courseware/c
 // 获取oss Token
 export const getOSStoken = (data, headers) =>
   Request.get("/maxwell/v1.0/oss/token", data, headers);
+
+// 批量上传
+export const batchUploadSource = (data, headers) =>
+  Request.post("/maxwell/v1.0/courseware/batch", data, headers);
