@@ -21,7 +21,7 @@
           </div>
           <div class="file_name">
             <div class="course_name">课件名称:</div>
-            <input type="text" v-model="item.name" />
+            <input type="text" v-model="item.filename" />
           </div>
           <div class="file_label">
             <div class="course_name">课件标签:</div>
@@ -75,33 +75,44 @@ export default {
       console.log(obj);
       return obj[0].type;
     },
+    // 上传到阿里云
     handleImport() {
+      this.$emit("uploadList");
+      this.$parent.course = false;
       console.log(this.courselist);
       let filelist = this.courselist.map((item) => {
         return {
-          fileName: item.name.split(".")[0],
+          fileName: item.filename.split(".")[0],
           fileSize: item.size,
           intro: item.intro,
           label: item.label,
-          name: item.name,
+          name: item.filename,
           overrun: false,
           type: this.getType(item.type),
           uploadStatu: item.status,
         };
       });
-      uploadSource(this.courselist).then((res) => {
+      uploadSource(this.courselist, this).then((res) => {
         console.log(res);
-        // filelist.forEach((item, index) => {
-        //   item.fileUrl = res[index].res.requestUrls[0];
-        // });
+        filelist.forEach((item, index) => {
+          item.fileUrl = res[index].res.requestUrls[0].split("?")[0];
+        });
+        this.batchUploadSourceFun(filelist);
+
         console.log(filelist);
       });
     },
-    batchUploadSourceFun() {
+    // 阿里云服务器和后端衔接
+    batchUploadSourceFun(res) {
       batchUploadSource({
         categoryId: this.parentId,
-        FileList: [],
-      }).then(() => {});
+        fileList: res,
+      }).then((res) => {
+        console.log(res);
+        if (res.code == 200) {
+          this.$emit("autoClose");
+        }
+      });
     },
   },
 };

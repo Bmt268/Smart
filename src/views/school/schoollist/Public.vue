@@ -80,11 +80,26 @@
       ></modify-process>
       <copytree @clickClose="clickClose" v-if="hidden" :citem="item"></copytree>
       <upload
-        v-if="course"
+        v-show="course"
         :courselist="courselist"
         @clickClose="clickClose"
         :parentId="parentId"
+        @autoClose="autoClose"
+        @uploadList="uploadList"
       ></upload>
+      <div class="upload_progress" v-show="uploadlist">
+        <div class="upload_first">
+          <div class="uploading">正在上传 {{ courselist.length }} 项</div>
+          <i class="el-icon-arrow-down"></i>
+        </div>
+        <div class="upload_second">
+          <div class="upload_item" v-for="item in courselist" :key="item.uid">
+            <div class="upitem_title">{{ item.filename }}</div>
+            <i class="el-icon-success" v-if="item.status == 'success'"></i>
+            <i class="el-icon-loading" v-if="item.status == 'loading'"></i>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -98,6 +113,7 @@ import {
 import ModifyProcess from "../../AIClass/components/ModifyProcess.vue";
 import Copytree from "../../../components/Copytree.vue";
 import Upload from "./Upload.vue";
+import { mapGetters } from "vuex";
 export default {
   components: { ModifyProcess, Copytree, Upload },
   data() {
@@ -117,8 +133,11 @@ export default {
       hidden: false,
       item: "",
       course: false,
-      courselist: [],
+      uploadlist: false,
     };
+  },
+  computed: {
+    ...mapGetters(["courselist"]),
   },
   mounted() {
     this.parentId = this.$route.query.id;
@@ -142,6 +161,13 @@ export default {
       this.show = false;
       this.hidden = false;
       this.course = false;
+      this.$store.commit("clearList");
+    },
+    // 上传完毕后
+    autoClose() {
+      this.course = false;
+      this.getCateGoryCoursewareFun();
+      // this.uploadlist = false;
     },
     getCateGoryChildrenFun() {
       getCateGoryChildren({ parentId: this.parentId }).then((res) => {
@@ -157,6 +183,7 @@ export default {
       this.getCateGoryChildrenFun();
       this.getCateGoryCoursewareFun();
     },
+    // 里面内容列表
     getCateGoryCoursewareFun() {
       getCateGoryCourseware({ categoryId: this.parentId }).then((res) => {
         this.wareList = res.data;
@@ -203,12 +230,20 @@ export default {
       this.deleteCoursewareFun(item.id);
     },
     httpRequest(res) {
-      this.courselist.push(res.file);
-      this.courselist.forEach((item) => {
+      this.$store.commit("clearList");
+      let list = [];
+      list.push(res.file);
+      list.forEach((item) => {
         item.intro = "";
         item.label = "";
+        item.filename = item.name;
+        item.status = "loading";
       });
+      this.$store.commit("changelist", list);
       this.course = true;
+    },
+    uploadList() {
+      this.uploadlist = true;
     },
   },
 };
@@ -294,14 +329,25 @@ export default {
     flex-wrap: wrap;
     align-content: flex-start;
     padding-left: 32px;
-    min-height: calc(100vh - 89px - 66px);
+    height: calc(100vh - 89px - 66px);
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 14px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #d8d8d8;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-track-piece {
+      background: transparent;
+    }
     .content_item {
       width: 414px;
       height: 320px;
       background: #ffffff;
       border-radius: 4px;
       text-align: center;
-      margin-right: 28px;
+      margin-right: 24px;
       margin-top: 32px;
       display: flex;
       flex-direction: column;
@@ -373,6 +419,50 @@ export default {
     }
     .el-empty {
       margin: 0 auto;
+    }
+    .upload_progress {
+      width: 500px;
+      height: 289px;
+      background: #ffffff;
+      box-shadow: -5px 0px 12px 0px rgba(28, 25, 24, 0.1),
+        5px 0px 12px 0px rgba(28, 25, 24, 0.1);
+      border-radius: 8px 8px 0px 0px;
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      .upload_first {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        width: 500px;
+        height: 80px;
+        background: #6e6d7a;
+        border-radius: 8px 8px 0px 0px;
+        color: #fff;
+        font-size: 20px;
+        letter-spacing: 1px;
+        .el-icon-arrow-down {
+          cursor: pointer;
+        }
+      }
+      .upload_second {
+        .upload_item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 20px;
+          width: 500px;
+          height: 70px;
+          background: #f6f6f6;
+          letter-spacing: 1px;
+          color: #6e6d7a;
+          font-size: 18px;
+          .el-icon-success {
+            color: #07c160;
+          }
+        }
+      }
     }
   }
 }

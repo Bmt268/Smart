@@ -2,7 +2,8 @@ import { getOSStoken } from "@/api/home.js"
 
 const OSS = require('ali-oss')
 
-const uploadSource = (course) => {
+const uploadSource = (course, that) => {
+    console.log(that);
     return new Promise((resolve, reject) => {
         getOSStoken().then((res) => {
             let { accessKeyId, accessKeySecret, expiration, securityToken } = res.data
@@ -22,23 +23,22 @@ const uploadSource = (course) => {
                 client.multipartUpload(`${folder}${course[index].name}`, course[index], {
                     partSize: 1024 * 400,//分片大小
                     timeout: 12000,//超时
-                    progress: function (value) {
-                        console.log(value);
-                    } //进度条
+                    // progress: function (value) {
+                    //     console.log(value);
+                    // } //进度条
                 }).then((res) => {
                     if (res.res.status == 200) {
+                        that.$store.commit('changeStatus', index)
                         index++
                         result.push(res)
                         if (index < course.length) {
                             uploadOss()
-                        }
-                        if (index === course.length) {
-                            resolve(result)
                         } else {
-                            reject()
+                            resolve(result)
                         }
-
                     }
+                }).catch(() => {
+                    reject()
                 })
             }
             uploadOss()
