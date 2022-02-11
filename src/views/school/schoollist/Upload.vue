@@ -17,7 +17,7 @@
         >
           <div class="file_num">
             <div class="numbers">0{{ index + 1 }}</div>
-            <i class="el-icon-circle-close"></i>
+            <i class="el-icon-circle-close" @click="handleDelete(index)"></i>
           </div>
           <div class="file_name">
             <div class="course_name">课件名称:</div>
@@ -37,7 +37,17 @@
         </div>
       </div>
       <div class="btn">
-        <div class="cancel">继续添加</div>
+        <el-upload
+          class="upload-demo"
+          action="#"
+          :http-request="httpRequest"
+          multiple
+          :limit="5"
+          :file-list="courselist"
+          :show-file-list="false"
+        >
+          <div class="cancel">继续添加</div>
+        </el-upload>
         <div class="makesure" @click="handleImport">开始导入</div>
       </div>
     </div>
@@ -63,11 +73,16 @@ export default {
     handleClose() {
       this.$emit("clickClose");
     },
+    handleDelete(index) {
+      this.$store.commit("deletelist", index);
+    },
     getType(name) {
+      console.log(this.courselist);
       let typelist = [
         { name: "image/jpeg", type: 4 },
-        { name: "mp4", type: 3 },
+        { name: "video/mp4", type: 0 },
         { name: "image/png", type: 4 },
+        { name: "image/gif", type: 4 },
       ];
       let obj = typelist.filter((item) => {
         return item.name == name;
@@ -77,9 +92,21 @@ export default {
     },
     // 上传到阿里云
     handleImport() {
-      this.$emit("uploadList");
+      if (this.courselist.length == 0) {
+        this.$message({
+          type: "warning",
+          message: "请上传至少一个文件",
+        });
+        return;
+      } else if (this.courselist.length > 5) {
+        this.$message({
+          type: "warning",
+          message: "最多上传五个文件",
+        });
+        return;
+      }
       this.$parent.course = false;
-      console.log(this.courselist);
+      this.$emit("uploadList");
       let filelist = this.courselist.map((item) => {
         return {
           fileName: item.filename.split(".")[0],
@@ -93,7 +120,6 @@ export default {
         };
       });
       uploadSource(this.courselist, this).then((res) => {
-        console.log(res);
         filelist.forEach((item, index) => {
           item.fileUrl = res[index].res.requestUrls[0].split("?")[0];
         });
@@ -113,6 +139,17 @@ export default {
           this.$emit("autoClose");
         }
       });
+    },
+    httpRequest(res) {
+      let list = [];
+      list.push(res.file);
+      list.forEach((item) => {
+        item.intro = "";
+        item.label = "";
+        item.filename = item.name;
+        item.status = "loading";
+      });
+      this.$store.commit("changelist", list);
     },
   },
 };

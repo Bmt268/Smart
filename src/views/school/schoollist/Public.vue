@@ -32,7 +32,7 @@
           :file-list="courselist"
           :show-file-list="false"
         >
-          <div class="theme_upload">资源上传</div>
+          <div class="theme_upload" @click="uploadFail">资源上传</div>
         </el-upload>
       </div>
     </div>
@@ -63,7 +63,7 @@
         <!-- 更多弹窗 -->
         <div class="more_detail" v-if="item.select">
           <div class="ercode">课程二维码</div>
-          <div class="rename">重命名</div>
+          <div class="rename" @click="handleReset(item)">重命名</div>
           <div class="delete" @click="handleDelete(item)">删除</div>
           <div class="copy" @click="handleCopy(item)">复制到</div>
         </div>
@@ -87,6 +87,12 @@
         @autoClose="autoClose"
         @uploadList="uploadList"
       ></upload>
+      <reset
+        @clickClose="clickClose"
+        @update="update"
+        v-if="rename"
+        :freshname="freshname"
+      ></reset>
       <div class="upload_progress" v-show="uploadlist">
         <div class="upload_first">
           <div class="uploading">正在上传 {{ courselist.length }} 项</div>
@@ -110,12 +116,15 @@ import {
   getCateGoryCourseware,
   deleteCourseware,
 } from "@/api/home.js";
+
 import ModifyProcess from "../../AIClass/components/ModifyProcess.vue";
 import Copytree from "../../../components/Copytree.vue";
 import Upload from "./Upload.vue";
+import Reset from "@/views/school/schoollist/Reset";
+
 import { mapGetters } from "vuex";
 export default {
-  components: { ModifyProcess, Copytree, Upload },
+  components: { ModifyProcess, Copytree, Upload, Reset },
   data() {
     return {
       isactive: 0,
@@ -134,6 +143,8 @@ export default {
       item: "",
       course: false,
       uploadlist: false,
+      rename: false,
+      freshname: {},
     };
   },
   computed: {
@@ -161,13 +172,18 @@ export default {
       this.show = false;
       this.hidden = false;
       this.course = false;
+      this.rename = false;
       this.$store.commit("clearList");
     },
     // 上传完毕后
     autoClose() {
       this.course = false;
       this.getCateGoryCoursewareFun();
-      // this.uploadlist = false;
+      this.uploadlist = false;
+      this.$message({
+        type: "success",
+        message: "上传成功",
+      });
     },
     getCateGoryChildrenFun() {
       getCateGoryChildren({ parentId: this.parentId }).then((res) => {
@@ -214,7 +230,8 @@ export default {
     // 点击更多
     handleMore(item) {
       console.log(item);
-      this.$set(item, "select", true);
+      this.$set(item, "select", !item.select);
+      // select首次点击是ture
     },
     handleCopy(item) {
       this.hidden = true;
@@ -230,7 +247,6 @@ export default {
       this.deleteCoursewareFun(item.id);
     },
     httpRequest(res) {
-      this.$store.commit("clearList");
       let list = [];
       list.push(res.file);
       list.forEach((item) => {
@@ -241,9 +257,18 @@ export default {
       });
       this.$store.commit("changelist", list);
       this.course = true;
+      console.log(123);
     },
     uploadList() {
       this.uploadlist = true;
+    },
+    uploadFail() {
+      this.$store.commit("clearList");
+    },
+    // 重命名
+    handleReset(item) {
+      this.rename = true;
+      this.freshname = item;
     },
   },
 };
@@ -447,6 +472,11 @@ export default {
         }
       }
       .upload_second {
+        height: 210px;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          width: 0;
+        }
         .upload_item {
           display: flex;
           justify-content: space-between;
@@ -454,10 +484,12 @@ export default {
           padding: 0 20px;
           width: 500px;
           height: 70px;
-          background: #f6f6f6;
           letter-spacing: 1px;
           color: #6e6d7a;
           font-size: 18px;
+          &:nth-child(odd) {
+            background: #f6f6f6;
+          }
           .el-icon-success {
             color: #07c160;
           }

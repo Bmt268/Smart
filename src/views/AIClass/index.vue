@@ -24,6 +24,11 @@
           </div>
         </div>
       </div>
+      <!-- 领域分布 -->
+      <div class="field">
+        <div id="main" class="radar_content"></div>
+      </div>
+
       <!-- 操作弹窗 -->
       <div class="oper_window" v-show="hidden">
         <div class="download">下载课表</div>
@@ -98,6 +103,7 @@ export default {
   },
   mounted() {
     this.getWeekOfMonthFun();
+    this.drawRadar();
   },
   methods: {
     // 环节日期
@@ -137,7 +143,6 @@ export default {
       });
     },
     // 环节列表
-
     getmaterialchedulingFun() {
       getmaterialcheduling({
         roomId: localStorage.getItem("roomid"),
@@ -149,6 +154,71 @@ export default {
     },
     clickClose() {
       this.show = false;
+    },
+    // 雷达图
+    drawRadar() {
+      let myChart = this.$echarts.init(document.getElementById("main"));
+      console.log(myChart);
+      let option = {
+        grid: {
+          // 控制图的大小，调整下面这些值就可以，
+          x: 40,
+          x2: 100,
+          y2: 150, // y2可以控制 X轴跟Zoom控件之间的间隔，避免以为倾斜后造成 label重叠到zoom上
+        },
+        radar: {
+          // shape: 'circle',
+
+          indicator: [
+            { name: "社会", max: 8500, color: "#6E6D7A" },
+            { name: "健康", max: 16000, color: "#6E6D7A" },
+            { name: "艺术", max: 30000, color: "#6E6D7A" },
+            { name: "语言", max: 38000, color: "#6E6D7A" },
+            { name: "科学", max: 52000, color: "#6E6D7A" },
+          ],
+          axisName: {
+            fontSize: 16,
+          },
+          axisLine: {
+            show: false,
+          },
+          splitArea: {
+            show: false,
+          },
+          center: ["50%", "50%"],
+          splitNumber: 4,
+        },
+
+        series: [
+          {
+            name: "排课统计",
+            type: "radar",
+            data: [
+              {
+                value: [4200, 3000, 20000, 35000, 50000],
+                name: "学科",
+                itemStyle: {
+                  color: "rgba(229, 66, 62, 1)",
+                },
+                symbolSize: 6,
+                areaStyle: {
+                  color: "rgba(229, 66, 62, 0.2)",
+                },
+                lineStyle: {
+                  width: 1,
+                },
+              },
+            ],
+          },
+        ],
+        splitLine: {
+          lineStyle: {
+            width: 0.5,
+            color: "#D8D8D8",
+          },
+        },
+      };
+      myChart.setOption(option);
     },
   },
 };
@@ -241,6 +311,24 @@ export default {
         }
       }
     }
+    // 领域分布
+    .field {
+      width: 500px;
+      height: 425px;
+      background: #ffffff;
+      box-shadow: 0px 3px 12px 0px rgba(28, 25, 24, 0.3);
+      position: absolute;
+      top: 102px;
+      right: 0;
+      z-index: 4;
+      .radar_content {
+        width: 425px;
+        height: 425px;
+        margin-top: 20px;
+        margin-left: 20px;
+      }
+    }
+
     .oper_window {
       width: 137px;
       height: 97px;

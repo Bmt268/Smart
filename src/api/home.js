@@ -250,3 +250,7 @@ export const getOSStoken = (data, headers) =>
 // 批量上传
 export const batchUploadSource = (data, headers) =>
   Request.post("/maxwell/v1.0/courseware/batch", data, headers);
+
+// 重命名
+export const setCoursewareRename = (data, headers) =>
+  Request.post("/maxwell/v1.0/courseware/rename", data, headers);

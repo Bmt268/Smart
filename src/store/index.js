@@ -22,6 +22,9 @@ export default new Vuex.Store({
     },
     clearList(state) {
       state.courselist = []
+    },
+    deletelist(state, index) {
+      state.courselist.splice(index, 1)
     }
 
 
