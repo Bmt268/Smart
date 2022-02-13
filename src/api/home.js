@@ -217,6 +217,14 @@ export const getWeekOfMonth = (data, headers) => {
   return Request.get("/maxwell/v1.0/schedule/weekOfMonth", data, headers);
 };
 
+// 获取环节
+export const getScheduleProcessList = (data, headers) =>
+  Request.get("/maxwell/v1.0/schedule/v4/processes", data, headers);
+
+// 获取环节选项
+export const getProcessdistinct = (data, headers) =>
+  Request.get("/maxwell/v1.0/schedule/v4/processes/distinct", data, headers);
+
 
 // 园所资源
 

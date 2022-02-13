@@ -11,7 +11,7 @@
           <div class="thisweek">本周</div>
           <div class="edittimetable">编辑课表</div>
           <div class="lesson_plan">教学计划</div>
-          <div class="distribution">领域分布</div>
+          <div class="distribution" @click="clickField">领域分布</div>
           <div class="operation">
             <div class="oper">操作</div>
             <i
@@ -25,7 +25,8 @@
         </div>
       </div>
       <!-- 领域分布 -->
-      <div class="field">
+      <div class="field" v-show="field">
+        <div class="field_name">排课统计</div>
         <div id="main" class="radar_content"></div>
       </div>
 
@@ -77,7 +78,7 @@
         </table>
       </div>
       <!-- 修改环节 -->
-      <modify-process v-if="show" @clickClose="clickClose"></modify-process>
+      <revise-progress v-if="show" @clickClose="clickClose"></revise-progress>
     </div>
   </div>
 </template>
@@ -88,9 +89,9 @@ import {
   getWeekOfMonth,
   getmaterialcheduling,
 } from "@/api/home.js";
-import ModifyProcess from "./components/ModifyProcess.vue";
+import ReviseProgress from "@/views/AIClass/components/ReviseProgress";
 export default {
-  components: { ModifyProcess },
+  components: { ReviseProgress },
   data() {
     return {
       hidden: false,
@@ -99,11 +100,13 @@ export default {
       process: [],
       classlist: [],
       show: false,
+      max: 4,
+      radardate: {},
+      field: false,
     };
   },
   mounted() {
     this.getWeekOfMonthFun();
-    this.drawRadar();
   },
   methods: {
     // 环节日期
@@ -131,7 +134,16 @@ export default {
         this.classlist.teachDataArr.forEach((item) => {
           item.process = this.process.splice(0, item.timeData.length);
         });
-        console.log(this.classlist);
+        this.radardate = this.classlist.map;
+        for (const key in this.radardate) {
+          if (Object.hasOwnProperty.call(this.radardate, key)) {
+            const element = this.radardate[key];
+            if (element > this.max) {
+              this.max = element;
+            }
+          }
+        }
+        this.drawRadar();
       });
     },
     // 标题日期
@@ -160,24 +172,18 @@ export default {
       let myChart = this.$echarts.init(document.getElementById("main"));
       console.log(myChart);
       let option = {
-        grid: {
-          // 控制图的大小，调整下面这些值就可以，
-          x: 40,
-          x2: 100,
-          y2: 150, // y2可以控制 X轴跟Zoom控件之间的间隔，避免以为倾斜后造成 label重叠到zoom上
-        },
         radar: {
           // shape: 'circle',
 
           indicator: [
-            { name: "社会", max: 8500, color: "#6E6D7A" },
-            { name: "健康", max: 16000, color: "#6E6D7A" },
-            { name: "艺术", max: 30000, color: "#6E6D7A" },
-            { name: "语言", max: 38000, color: "#6E6D7A" },
-            { name: "科学", max: 52000, color: "#6E6D7A" },
+            { name: "社会", max: this.max, color: "#6E6D7A" },
+            { name: "健康", max: this.max, color: "#6E6D7A" },
+            { name: "艺术", max: this.max, color: "#6E6D7A" },
+            { name: "语言", max: this.max, color: "#6E6D7A" },
+            { name: "科学", max: this.max, color: "#6E6D7A" },
           ],
           axisName: {
-            fontSize: 16,
+            fontSize: 12,
           },
           axisLine: {
             show: false,
@@ -185,17 +191,23 @@ export default {
           splitArea: {
             show: false,
           },
+          radius: ["0%", "70%"],
           center: ["50%", "50%"],
           splitNumber: 4,
         },
-
         series: [
           {
             name: "排课统计",
             type: "radar",
             data: [
               {
-                value: [4200, 3000, 20000, 35000, 50000],
+                value: [
+                  this.radardate.society,
+                  this.radardate.health,
+                  this.radardate.art,
+                  this.radardate.language,
+                  this.radardate.science,
+                ],
                 name: "学科",
                 itemStyle: {
                   color: "rgba(229, 66, 62, 1)",
@@ -219,6 +231,9 @@ export default {
         },
       };
       myChart.setOption(option);
+    },
+    clickField() {
+      this.field = !this.field;
     },
   },
 };
@@ -286,6 +301,7 @@ export default {
           border-radius: 4px;
           border: 1px solid #bfbfbf;
           margin-right: 8px;
+          cursor: pointer;
         }
         .operation {
           width: 137px;
@@ -313,7 +329,7 @@ export default {
     }
     // 领域分布
     .field {
-      width: 500px;
+      width: 400px;
       height: 425px;
       background: #ffffff;
       box-shadow: 0px 3px 12px 0px rgba(28, 25, 24, 0.3);
@@ -321,11 +337,17 @@ export default {
       top: 102px;
       right: 0;
       z-index: 4;
+      .field_name {
+        color: #0d0b22;
+        font-size: 18px;
+        margin-top: 35px;
+        margin-left: 30px;
+      }
       .radar_content {
-        width: 425px;
-        height: 425px;
+        width: 350px;
+        height: 350px;
         margin-top: 20px;
-        margin-left: 20px;
+        margin-left: 30px;
       }
     }
 
